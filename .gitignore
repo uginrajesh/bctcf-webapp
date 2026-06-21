@@ -20,5 +20,3 @@ build/
 .DS_Store
 Thumbs.db
 *.log
-
-.vercel
