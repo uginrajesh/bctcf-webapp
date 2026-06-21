@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "home": "Home", "about": "About Us", "events": "Events",
+    "prayer": "Prayer Requests", "members": "New Members",
+    "socials": "Socials", "contact": "Contact Us"
+  },
+  "common": {
+    "communityName": "BC Tamil Catholic Family",
+    "tagline": "Connected by our Tamil language, keeping Jesus at the centre",
+    "joinCta": "Join Our Family",
+    "languageName": "தமிழ்"
+  }
+}
