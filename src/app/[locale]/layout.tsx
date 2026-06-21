@@ -4,6 +4,8 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Inter, Noto_Sans_Tamil } from 'next/font/google'
 import { routing } from '@/i18n/routing'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -35,7 +37,9 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${inter.variable} ${tamil.variable}`}>
       <body className={locale === 'ta' ? 'font-tamil' : 'font-sans'}>
         <NextIntlClientProvider messages={messages}>
+          <Header />
           {children}
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>
