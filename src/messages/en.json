@@ -32,5 +32,28 @@
     "qaEvents": "Events", "qaEventsSub": "What's coming up",
     "qaSocials": "Socials", "qaSocialsSub": "Stay connected",
     "announcements": "Latest Announcements"
+  },
+  "about": {
+    "title": "About Us", "tamilLabel": "எங்களைப் பற்றி",
+    "story": "Our Story", "storyBody": "How Tamil Catholic families across BC came together to worship and support one another.",
+    "mission": "Our Mission", "missionBody": "To nurture faith, family, and Tamil Catholic heritage in a welcoming community.",
+    "vision": "Our Vision", "visionBody": "A connected family where every household finds belonging and a spiritual home.",
+    "coreValues": "Core Values",
+    "values": "Faith,Family,Community,Service,Tamil Heritage"
+  },
+  "prayer": {
+    "title": "Prayer Requests", "tamilLabel": "செப மன்றாட்டுகள்",
+    "intro": "Share your intentions with our community. Our coordinators gather requests and our priests remember them at Holy Mass.",
+    "confidential": "Confidential — requests are seen only by coordinators and clergy, never published on the website.",
+    "cta": "Submit a Prayer Request"
+  },
+  "socials": {
+    "title": "Socials", "tamilLabel": "சமூக வலைதளங்கள்",
+    "intro": "Stay connected with our community."
+  },
+  "contact": {
+    "title": "Contact Us", "tamilLabel": "தொடர்பு கொள்ளுங்கள்",
+    "getInTouch": "Get in Touch",
+    "location": "We gather across the Greater Vancouver area. See Events for the next Mass location."
   }
 }

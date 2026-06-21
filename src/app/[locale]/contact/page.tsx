@@ -1,0 +1,32 @@
+import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { PageBanner } from '@/components/ui/PageBanner'
+import { Section } from '@/components/ui/Section'
+import { SITE } from '@/config/site'
+
+export default async function ContactPage({ params }: { params: { locale: string } }) {
+  setRequestLocale(params.locale)
+  const t = await getTranslations('contact')
+  return (
+    <main>
+      <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
+      <Section>
+        <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
+          <div className="rounded-lg border border-brand-creamDark bg-brand-cream p-5 text-sm text-slate-600">
+            <h4 className="mb-2 font-serif text-brand-blue">{t('getInTouch')}</h4>
+            <p className="mb-2">✉️ <a className="text-brand-blue underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+            <p>📍 {t('location')}</p>
+          </div>
+          <div className="overflow-hidden rounded-lg">
+            <iframe
+              src={SITE.mapEmbedUrl}
+              title="Meeting location map"
+              className="h-48 w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+      </Section>
+    </main>
+  )
+}
