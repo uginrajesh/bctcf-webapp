@@ -1,6 +1,6 @@
 <svg width="680" height="680" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
 <title>BC Tamil Catholic Family logo</title>
-<desc>A gold circular seal. A ring of diverse people in blue, orange, gold and yellow hold hands around a central spiritual symbol of a white dove, golden cross, light rays and a lit lamp with flame. Tamil text curves across the top, English across the bottom.</desc>
+<desc>A gold circular seal. A ring of diverse people in blue, orange, gold and yellow hold hands around a central spiritual symbol of a white dove, golden cross, light rays and a chalice holding the Host with a flame beneath the cross. Tamil text curves across the top, English across the bottom.</desc>
 <defs>
 <g id="ray"><polygon points="340,340 337,256 343,256" fill="#f2c84b"/></g>
 <g id="person">
@@ -24,14 +24,17 @@
 <use href="#ray"/><use href="#ray" transform="rotate(22.5 340 340)"/><use href="#ray" transform="rotate(45 340 340)"/><use href="#ray" transform="rotate(67.5 340 340)"/><use href="#ray" transform="rotate(90 340 340)"/><use href="#ray" transform="rotate(112.5 340 340)"/><use href="#ray" transform="rotate(135 340 340)"/><use href="#ray" transform="rotate(157.5 340 340)"/><use href="#ray" transform="rotate(180 340 340)"/><use href="#ray" transform="rotate(202.5 340 340)"/><use href="#ray" transform="rotate(225 340 340)"/><use href="#ray" transform="rotate(247.5 340 340)"/><use href="#ray" transform="rotate(270 340 340)"/><use href="#ray" transform="rotate(292.5 340 340)"/><use href="#ray" transform="rotate(315 340 340)"/><use href="#ray" transform="rotate(337.5 340 340)"/>
 </g>
 
-<ellipse cx="340" cy="431" rx="15" ry="4" fill="#cf9b2a"/>
-<rect x="337" y="417" width="6" height="12" fill="#cf9b2a"/>
-<path d="M322,397 L358,397 L350,412 Q340,421 330,412 Z" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
-<path d="M340,382 Q331,393 340,401 Q349,393 340,382 Z" fill="#e2872f"/>
-<path d="M340,388 Q335,394 340,400 Q345,394 340,388 Z" fill="#f2c84b"/>
+<rect x="333" y="286" width="14" height="86" rx="3" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
+<rect x="312" y="310" width="56" height="14" rx="3" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
 
-<rect x="332" y="290" width="16" height="108" rx="3" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
-<rect x="311" y="317" width="58" height="16" rx="3" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
+<ellipse cx="340" cy="435" rx="15" ry="4" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
+<path d="M331,430 L349,430 L352,435 L328,435 Z" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
+<rect x="337" y="420" width="6" height="11" fill="#cf9b2a"/>
+<circle cx="340" cy="420" r="4" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
+<path d="M320,399 L360,399 L353,411 Q340,421 327,411 Z" fill="#d8a92e" stroke="#a9781a" stroke-width="1"/>
+
+<circle cx="340" cy="388" r="13" fill="#ffffff" stroke="#cf9b2a" stroke-width="2"/>
+<path d="M340,380 L340,396 M333,388 L347,388" stroke="#cf9b2a" stroke-width="1.6" fill="none"/>
 
 <path d="M336,279 Q304,261 285,270 Q307,281 333,291 Z" fill="#ffffff" stroke="#cf9b2a" stroke-width="1.2"/>
 <path d="M344,279 Q376,261 395,270 Q373,281 347,291 Z" fill="#ffffff" stroke="#cf9b2a" stroke-width="1.2"/>
