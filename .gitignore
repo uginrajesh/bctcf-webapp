@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+
+# Environment variables
+.env
+.env*.local
+
+# Vercel
+.vercel
+
+# Visual companion (brainstorming) artifacts
+.superpowers/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
