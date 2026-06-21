@@ -10,6 +10,12 @@
     "joinCta": "Join Our Family",
     "languageName": "தமிழ்"
   },
+  "events": {
+    "title": "Events", "tamilLabel": "நிகழ்வுகள்",
+    "upcomingLabel": "Upcoming",
+    "empty": "Events coming soon — check back shortly.",
+    "homeDontMiss": "Don't Miss", "homeUpcoming": "Upcoming Event"
+  },
   "home": {
     "heroWelcomeTa": "அன்புடன் வரவேற்கிறோம்",
     "heroHeading": "Welcome to Our Family",

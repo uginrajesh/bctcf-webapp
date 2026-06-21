@@ -1,14 +1,16 @@
-import { setRequestLocale } from 'next-intl/server'
-import { useTranslations } from 'next-intl'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { Hero } from '@/components/sections/Hero'
 import { Section } from '@/components/ui/Section'
 import { MissionCards } from '@/components/sections/MissionCards'
+import { UpcomingEvent } from '@/components/sections/UpcomingEvent'
 import { QuickAccess } from '@/components/sections/QuickAccess'
 import { Announcements } from '@/components/sections/Announcements'
+import { getUpcomingEvents } from '@/lib/google-calendar'
 
-export default function Home({ params }: { params: { locale: string } }) {
+export default async function Home({ params }: { params: { locale: string } }) {
   setRequestLocale(params.locale)
-  const t = useTranslations('home')
+  const t = await getTranslations('home')
+  const [next] = await getUpcomingEvents(1)
   return (
     <main>
       <Hero />
@@ -17,7 +19,7 @@ export default function Home({ params }: { params: { locale: string } }) {
         <p className="mx-auto max-w-2xl leading-relaxed text-slate-600">{t('welcomeBody')}</p>
       </Section>
       <MissionCards />
-      {/* UpcomingEvent inserted here in Task 11 */}
+      <UpcomingEvent event={next ?? null} />
       <QuickAccess />
       <Announcements />
     </main>
