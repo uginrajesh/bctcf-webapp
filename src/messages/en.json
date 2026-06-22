@@ -55,5 +55,18 @@
     "title": "Contact Us", "tamilLabel": "தொடர்பு கொள்ளுங்கள்",
     "getInTouch": "Get in Touch",
     "location": "We gather across the Greater Vancouver area. See Events for the next Mass location."
+  },
+  "members": {
+    "title": "New Members", "tamilLabel": "புதிய உறுப்பினர்கள்",
+    "intro": "New to British Columbia or just discovering us? We'd love to welcome your family. Fill in the form and a coordinator will reach out.",
+    "name": "Full Name", "email": "Email", "phone": "Phone (WhatsApp)",
+    "familySize": "Family Size", "heardFrom": "How did you hear about us?",
+    "submit": "Join Our Family", "submitting": "Sending…",
+    "success": "Thank you! A coordinator will reach out to welcome you soon.",
+    "error": "Something went wrong. Please try again.",
+    "nextTitle": "What Happens Next",
+    "next1": "A coordinator reviews your details.",
+    "next2": "We reach out to welcome you personally.",
+    "next3": "You're added to our community WhatsApp group."
   }
 }
