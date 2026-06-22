@@ -1,8 +1,12 @@
 {
   "nav": {
-    "home": "Home", "about": "About Us", "events": "Events",
-    "prayer": "Prayer Requests", "members": "New Members",
-    "socials": "Socials", "contact": "Contact Us"
+    "home": "Home",
+    "about": "About Us",
+    "events": "Events",
+    "prayer": "Prayer Requests",
+    "members": "New Members",
+    "socials": "Socials",
+    "contact": "Contact Us"
   },
   "common": {
     "communityName": "BC Tamil Catholic Family",
@@ -11,10 +15,12 @@
     "languageName": "தமிழ்"
   },
   "events": {
-    "title": "Events", "tamilLabel": "நிகழ்வுகள்",
+    "title": "Events",
+    "tamilLabel": "நிகழ்வுகள்",
     "upcomingLabel": "Upcoming",
     "empty": "Events coming soon — check back shortly.",
-    "homeDontMiss": "Don't Miss", "homeUpcoming": "Upcoming Event"
+    "homeDontMiss": "Don't Miss",
+    "homeUpcoming": "Upcoming Event"
   },
   "home": {
     "heroWelcomeTa": "அன்புடன் வரவேற்கிறோம்",
@@ -23,51 +29,64 @@
     "welcomeTitle": "A Word of Welcome",
     "welcomeBody": "Whether you are a long-time member or a newcomer to British Columbia, you have a place with us. We gather in worship, support one another as families, and celebrate our Tamil Catholic heritage together.",
     "ourHeart": "Our Heart",
-    "faith": "Faith", "faithBody": "Christ at the centre of all we do.",
-    "family": "Family", "familyBody": "Every household belongs and is supported.",
-    "community": "Community", "communityBody": "Tamil heritage, shared in unity and service.",
+    "faith": "Faith",
+    "faithBody": "Christ at the centre of all we do.",
+    "family": "Family",
+    "familyBody": "Every household belongs and is supported.",
+    "community": "Community",
+    "communityBody": "Tamil heritage, shared in unity and service.",
     "quickAccess": "Quick Access",
-    "qaPrayer": "Prayer Requests", "qaPrayerSub": "Submit an intention",
-    "qaMembers": "New Members", "qaMembersSub": "Join our family",
-    "qaEvents": "Events", "qaEventsSub": "What's coming up",
-    "qaSocials": "Socials", "qaSocialsSub": "Stay connected",
+    "qaPrayer": "Prayer Requests",
+    "qaPrayerSub": "Submit an intention",
+    "qaMembers": "New Members",
+    "qaMembersSub": "Join our family",
+    "qaEvents": "Events",
+    "qaEventsSub": "What's coming up",
+    "qaSocials": "Socials",
+    "qaSocialsSub": "Stay connected",
     "announcements": "Latest Announcements"
   },
   "about": {
-    "title": "About Us", "tamilLabel": "எங்களைப் பற்றி",
-    "story": "Our Story", "storyBody": "How Tamil Catholic families across BC came together to worship and support one another.",
-    "mission": "Our Mission", "missionBody": "To nurture faith, family, and Tamil Catholic heritage in a welcoming community.",
-    "vision": "Our Vision", "visionBody": "A connected family where every household finds belonging and a spiritual home.",
+    "title": "About Us",
+    "tamilLabel": "எங்களைப் பற்றி",
+    "story": "Our Story",
+    "storyBody": "How Tamil Catholic families across BC came together to worship and support one another.",
+    "mission": "Our Mission",
+    "missionBody": "To nurture faith, family, and Tamil Catholic heritage in a welcoming community.",
+    "vision": "Our Vision",
+    "visionBody": "A connected family where every household finds belonging and a spiritual home.",
     "coreValues": "Core Values",
     "values": "Faith,Family,Community,Service,Tamil Heritage"
   },
   "prayer": {
-    "title": "Prayer Requests", "tamilLabel": "செப மன்றாட்டுகள்",
+    "title": "Prayer Requests",
+    "tamilLabel": "செப மன்றாட்டுகள்",
     "intro": "Share your intentions with our community. Our coordinators gather requests and our priests remember them at Holy Mass.",
-    "confidential": "Confidential — requests are seen only by coordinators and clergy, never published on the website.",
-    "cta": "Submit a Prayer Request"
+    "confidential": "Confidential — requests are seen only by coordinators and clergy, never published on the website."
   },
   "socials": {
-    "title": "Socials", "tamilLabel": "சமூக வலைதளங்கள்",
+    "title": "Socials",
+    "tamilLabel": "சமூக வலைதளங்கள்",
     "intro": "Stay connected with our community."
   },
   "contact": {
-    "title": "Contact Us", "tamilLabel": "தொடர்பு கொள்ளுங்கள்",
+    "title": "Contact Us",
+    "tamilLabel": "தொடர்பு கொள்ளுங்கள்",
     "getInTouch": "Get in Touch",
     "location": "We gather across the Greater Vancouver area. See Events for the next Mass location."
   },
   "members": {
-    "title": "New Members", "tamilLabel": "புதிய உறுப்பினர்கள்",
+    "title": "New Members",
+    "tamilLabel": "புதிய உறுப்பினர்கள்",
     "intro": "New to British Columbia or just discovering us? We'd love to welcome your family. Fill in the form and a coordinator will reach out.",
-    "name": "Full Name", "email": "Email", "phone": "Phone (WhatsApp)",
-    "familySize": "Family Size", "heardFrom": "How did you hear about us?",
-    "submit": "Join Our Family", "submitting": "Sending…",
-    "success": "Thank you! A coordinator will reach out to welcome you soon.",
-    "error": "Something went wrong. Please try again.",
     "nextTitle": "What Happens Next",
     "next1": "A coordinator reviews your details.",
     "next2": "We reach out to welcome you personally.",
     "next3": "You're added to our community WhatsApp group."
   },
-  "notFound": { "title": "Page not found", "body": "The page you're looking for isn't here.", "home": "Go Home" }
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for isn't here.",
+    "home": "Go Home"
+  }
 }

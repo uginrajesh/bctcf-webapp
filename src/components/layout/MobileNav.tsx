@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { Menu, X } from 'lucide-react'
 import { Link } from '@/i18n/routing'
 import { NAV_ITEMS } from '@/config/site'
 
@@ -13,9 +14,9 @@ export function MobileNav() {
         onClick={() => setOpen((v) => !v)}
         aria-label="Toggle menu"
         aria-expanded={open}
-        className="text-2xl text-brand-blue"
+        className="text-brand-blue"
       >
-        ☰
+        {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
       {open && (
         <nav className="absolute left-0 right-0 top-full z-20 flex flex-col gap-1 border-t bg-white p-4 shadow-lg">

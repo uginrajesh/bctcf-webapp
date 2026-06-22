@@ -8,7 +8,7 @@ A modern, warm, bilingual (English + Tamil) community website for **BC Tamil Cat
 - **Design spec:** `docs/superpowers/specs/2026-06-21-bctcf-website-design.md`
 - **Implementation plan:** `docs/superpowers/plans/2026-06-21-bctcf-website.md`
 
-No database. Events come from Google Calendar; the New Members form relays to a Google Apps Script (Sheet + email); prayer requests use a Google Form with a calendar-driven digest Apps Script.
+No database. Events come from Google Calendar; New Members and Prayer Requests embed Google Forms; a calendar-driven Apps Script emails a monthly prayer-intentions digest.
 
 ---
 
@@ -36,14 +36,22 @@ Routes are locale-prefixed: `/en/...` and `/ta/...`. The language toggle (top-ri
 | Content | How to update | Effect |
 |---|---|---|
 | Events | Add/edit in the community **Google Calendar** | Site refreshes within ~60 min (ISR) |
-| Home announcements | Edit `src/data/announcements.json`, push | Auto-deploys (~30s) |
-| UI text / translations | Edit `src/messages/en.json` / `src/messages/ta.json`, push | Auto-deploys |
-| Social / form / map links | Edit `src/config/site.ts`, push | Auto-deploys |
-| Images | Drop into `public/`, reference by filename | Auto-deploys |
-| Prayer requests | Flow entirely through Google Form → Sheet → digest Apps Script | None |
-| New-member records | Flow into Google Sheet + email | None |
+| Hero photos | Drop image files into `public/hero/` | Auto-included in the hero carousel on next push |
+| Home announcements | Edit `src/data/announcements.json` | Auto-deploys (~30s) |
+| About — Story / Mission / Vision, and all UI text | Edit `src/messages/en.json` / `src/messages/ta.json` | Auto-deploys |
+| Social / form / map links | Edit `src/config/site.ts` | Auto-deploys |
+| Prayer Requests / New Members | The pages **embed Google Forms** (see `src/config/site.ts`) | Edit the Google Form directly; no redeploy needed |
 
 > **Coordinators** are the volunteers who hold the shared community Google account (`bctamilcatholicfamily@gmail.com`) and run activities. The role is always "coordinator(s)", never "board member(s)".
+
+## Forms (Google Forms)
+
+Two community Google Forms are embedded directly in the site:
+
+- **New Members** — `SITE.newMemberFormUrl` in `src/config/site.ts` → embedded on `/new-members`.
+- **Prayer Requests + Mass availability + intentions** — `SITE.prayerFormUrl` → embedded on `/prayer-requests`.
+
+Responses land in each Form's linked Google Sheet. To change a form, edit it in Google Forms (no code change); to point the site at a different form, update the URL in `src/config/site.ts`.
 
 ## Environment variables
 
@@ -53,28 +61,19 @@ Copy `.env.example` to `.env.local` for local dev, and set the same keys in **Ve
 |---|---|---|
 | `GOOGLE_CALENDAR_API_KEY` | Events page | Google Cloud Console → APIs & Services → Credentials (restrict to Calendar API) |
 | `GOOGLE_CALENDAR_ID` | Events page | The community Google Calendar's "Calendar ID" (Calendar settings → Integrate calendar) |
-| `APPS_SCRIPT_URL` | New-member API route | The `/exec` Web App URL of the `new-member-receiver` Apps Script |
-| `APPS_SCRIPT_SECRET` | New-member API route | A shared secret; must equal the `SHARED_SECRET` Script Property in the Apps Script |
 
 With the calendar vars unset, the Events page simply shows a friendly empty state (no crash).
 
-## Google Apps Scripts (Google-side, deployed manually)
+## Prayer-digest Apps Script (Google-side, deployed manually)
 
-Both scripts live in `apps-script/` for version control and are deployed by hand into the community Google account.
+`apps-script/prayer-digest.gs` emails a digest of prayer intentions to `bctamilcatholicfamily@gmail.com` the day before each Mass, reading Mass dates from the community Google Calendar.
 
-### `new-member-receiver.gs`
-1. Create a Google Sheet "BCTCF New Members" → Extensions → Apps Script; paste the file.
-2. Project Settings → Script Properties → add `SHARED_SECRET` (same value as Vercel's `APPS_SCRIPT_SECRET`).
-3. Deploy → New deployment → **Web app**; Execute as **Me**, Who has access **Anyone**.
-4. Copy the `/exec` URL into Vercel's `APPS_SCRIPT_URL`.
-5. Test: submit the live New Members form once → confirm a Sheet row appears and an email arrives.
-
-### `prayer-digest.gs`
-1. Open the prayer-request Google Form's responses Sheet → Extensions → Apps Script; paste the file.
+1. Open the Prayer Requests Google Form's responses Sheet → Extensions → Apps Script; paste the file.
 2. Script Properties → add `CALENDAR_ID` (the community calendar id).
 3. Triggers → Add trigger → `sendPrayerDigestIfMassTomorrow` → Time-driven → Day timer → 8pm–9pm.
 4. Mass events on the calendar must contain the keyword **"Holy Mass"** in their title.
-5. Test: temporarily add a "Holy Mass" event for tomorrow + a test form response, Run the function, confirm the digest email (and that zero new intentions sends nothing).
+5. Adjust `SHEET_NAME` and the timestamp/intention **column indexes** at the top of the file to match your Form's response columns.
+6. Test: temporarily add a "Holy Mass" event for tomorrow + a test form response, Run the function, confirm the digest email (and that zero new intentions sends nothing).
 
 > The window-calculation logic in `prayer-digest.gs` is copied verbatim from `src/lib/digest-window.ts` (which is unit-tested). If you change one, change both.
 
@@ -85,15 +84,16 @@ Both scripts live in `apps-script/` for version control and are deployed by hand
 Functional code is complete; these items are real-world content/config the community supplies before going public:
 
 - [ ] Real social media URLs (Facebook, Instagram, YouTube, WhatsApp) in `src/config/site.ts`
-- [ ] Real Google Form URL (prayer requests) in `src/config/site.ts` (`prayerFormUrl`)
 - [ ] Real Google Maps embed URL in `src/config/site.ts` (`mapEmbedUrl`)
 - [ ] `GOOGLE_CALENDAR_API_KEY` + `GOOGLE_CALENDAR_ID` set in Vercel
-- [ ] `APPS_SCRIPT_URL` + `APPS_SCRIPT_SECRET` set in Vercel and matching the Apps Script `SHARED_SECRET`
 - [ ] Mass events titled with "Holy Mass" in the community calendar
+- [ ] `prayer-digest.gs` deployed with `CALENDAR_ID` + the daily trigger, and column indexes verified
+- [ ] Hero photos added to `public/hero/`
 - [ ] Header logo text decision confirmed (keep/drop the community-name text beside the logo)
-- [ ] Real hero/community photographs added (authentic, family/faith-focused; no corporate stock)
 - [ ] Welcome / Mission / Vision / Story copy finalized in both languages
 - [ ] Custom domain `bctamilcatholicfamily.ca` pointed at Vercel (after community feedback)
+
+> Done: New Members + Prayer Requests Google Forms are wired up (`src/config/site.ts`).
 
 ## Project structure
 
@@ -101,13 +101,12 @@ Functional code is complete; these items are real-world content/config the commu
 src/
   app/[locale]/        # locale-prefixed pages (home, about, events,
                        #   prayer-requests, new-members, socials, contact, 404)
-  app/api/new-member/  # form relay → Apps Script
-  components/          # layout/, ui/ (primitives), sections/
-  lib/                 # google-calendar, rate-limit, digest-window
+  components/          # layout/, ui/ (primitives + FormEmbed), sections/
+  lib/                 # google-calendar, digest-window, hero-images
   data/                # announcements.json
-  config/              # site.ts (nav, email, socials, map)
+  config/              # site.ts (nav, email, socials, form URLs, map)
   messages/            # en.json, ta.json
-apps-script/           # Google-side scripts (deployed manually)
-public/                # logo.svg and images
+apps-script/           # prayer-digest.gs (deployed manually, Google-side)
+public/                # logo.svg, hero/ (carousel photos), images
 docs/superpowers/      # design spec + implementation plan
 ```

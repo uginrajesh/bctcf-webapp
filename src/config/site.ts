@@ -23,6 +23,10 @@ export const SITE = {
   // TODO(content): replace with real Google Maps embed URL (Open Item #5)
   mapEmbedUrl:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83000!2d-123.1!3d49.25',
-  // TODO(content): replace with the real Google Form URL (Open Item: prayer form)
-  prayerFormUrl: 'https://docs.google.com/forms/d/e/EXAMPLE/viewform',
+  // Google Form: Mass availability + prayer intentions
+  prayerFormUrl:
+    'https://docs.google.com/forms/d/e/1FAIpQLSeIUMEFveFcGgmwFVVRWl16Vricy25O7uh7uyctkFmvkWP6VA/viewform',
+  // Google Form: New member registration
+  newMemberFormUrl:
+    'https://docs.google.com/forms/d/e/1FAIpQLSfLdKiIgEPs1bylp3si-e8mSBzL8U4LiRqNo67ONEmixDlbvw/viewform',
 } as const
