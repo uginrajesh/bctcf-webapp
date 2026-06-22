@@ -6,12 +6,12 @@
       "name": { "en": "Rev. Fr. [Full Name]", "ta": "அருள்பணி [முழுப் பெயர்]" },
       "role": { "en": "Spiritual Director", "ta": "ஆன்மீக இயக்குநர்" },
       "brief": {
-        "en": "A short one- or two-line introduction shown on the card. Replace this example entry with a real priest, and drop a photo into public/priests/.",
-        "ta": "அட்டையில் காண்பிக்கப்படும் ஓரிரு வரி அறிமுகம். இந்த உதாரணத்தை உண்மையான குருவின் விவரத்துடன் மாற்றி, public/priests/ இல் ஒரு புகைப்படத்தைச் சேர்க்கவும்."
+        "en": "A devoted shepherd who celebrates the Tamil Holy Mass with our community and walks with our families through every season of life — baptisms, first communions, weddings, and times of need.",
+        "ta": "எங்கள் சமூகத்துடன் தமிழ் திருப்பலியை நிறைவேற்றி, வாழ்வின் ஒவ்வொரு பருவத்திலும் — திருமுழுக்கு, முதல் நற்கருணை, திருமணம், தேவையான நேரங்களிலும் — எங்கள் குடும்பங்களுடன் இணைந்து பயணிக்கும் அர்ப்பணிப்புள்ள மேய்ப்பர்."
       },
       "full": {
-        "en": "The full biography shown in the Know more popup. Write as many lines as you like here — use line breaks to separate paragraphs. Include where the priest is from, their ministry, ordination, and a few words about their role in the community.",
-        "ta": "மேலும் அறிய பாப்-அப்பில் காண்பிக்கப்படும் முழு வாழ்க்கைக் குறிப்பு. இங்கே விரும்பிய அளவு வரிகளை எழுதலாம் — பத்திகளைப் பிரிக்க வரி இடைவெளிகளைப் பயன்படுத்தவும். குரு எங்கிருந்து வந்தவர், அவரது பணி, திருநிலைப்பாடு, மற்றும் சமூகத்தில் அவரது பங்கு பற்றிய சில வார்த்தைகளைச் சேர்க்கவும்."
+        "en": "Ordained to serve the people of God, Father brings a deep love for the Tamil Catholic tradition and a pastor's heart for community. He celebrates Mass and the sacraments in Tamil, accompanies families who are new to Canada, and encourages our children to grow strong in both their faith and their mother tongue.\n\nWhether at the altar, during a home visit, or over a cup of tea after Mass, he is a steady and prayerful presence — a reminder that, wherever we have come from, we are one family in Christ.",
+        "ta": "இறைமக்களுக்குப் பணியாற்ற திருநிலைப்படுத்தப்பட்ட அருட்தந்தை, தமிழ் கத்தோலிக்க பாரம்பரியத்தின் மீது ஆழ்ந்த அன்பையும், சமூகத்தின் மீது ஒரு மேய்ப்பரின் இதயத்தையும் கொண்டுள்ளார். அவர் தமிழில் திருப்பலியையும் திருவருட்சாதனங்களையும் நிறைவேற்றுகிறார், கனடாவுக்குப் புதிதாக வரும் குடும்பங்களுடன் இணைந்து செல்கிறார், மேலும் நம் பிள்ளைகள் தங்கள் விசுவாசத்திலும் தாய்மொழியிலும் வலிமையாக வளர ஊக்குவிக்கிறார்.\n\nபீடத்தில், வீட்டுச் சந்திப்பில், அல்லது திருப்பலிக்குப் பின் ஒரு கோப்பை தேநீருடன் — நாம் எங்கிருந்து வந்தாலும் கிறிஸ்துவில் ஒரே குடும்பம் என்பதை நினைவூட்டும் ஓர் உறுதியான, செபம் நிறைந்த இருப்பாக அவர் இருக்கிறார்."
       }
     }
   ]
