@@ -68,5 +68,6 @@
     "next1": "A coordinator reviews your details.",
     "next2": "We reach out to welcome you personally.",
     "next3": "You're added to our community WhatsApp group."
-  }
+  },
+  "notFound": { "title": "Page not found", "body": "The page you're looking for isn't here.", "home": "Go Home" }
 }
