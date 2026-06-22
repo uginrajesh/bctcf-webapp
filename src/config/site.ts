@@ -1,9 +1,10 @@
 export type NavKey =
-  | 'home' | 'about' | 'events' | 'prayer' | 'members' | 'socials' | 'contact'
+  | 'home' | 'about' | 'priests' | 'events' | 'prayer' | 'members' | 'socials' | 'contact'
 
 export const NAV_ITEMS: { key: NavKey; href: string }[] = [
   { key: 'home', href: '/' },
   { key: 'about', href: '/about' },
+  { key: 'priests', href: '/our-priests' },
   { key: 'events', href: '/events' },
   { key: 'prayer', href: '/prayer-requests' },
   { key: 'members', href: '/new-members' },

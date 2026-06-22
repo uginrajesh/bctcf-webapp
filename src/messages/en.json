@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "about": "About Us",
+    "priests": "Our Priests",
     "events": "Events",
     "prayer": "Prayer Requests",
     "members": "New Members",
@@ -68,6 +69,14 @@
     ],
     "coreValues": "Core Values",
     "values": "Faith,Family,Community,Service,Tamil Heritage"
+  },
+  "priests": {
+    "title": "Our Priests",
+    "tamilLabel": "நமது குருக்கள்",
+    "intro": "The priests who shepherd our community and celebrate Mass with us in Tamil.",
+    "knowMore": "Know more",
+    "close": "Close",
+    "empty": "Details about our priests are coming soon."
   },
   "prayer": {
     "title": "Prayer Requests",
