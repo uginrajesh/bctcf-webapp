@@ -19,7 +19,10 @@
     "title": "Events",
     "tamilLabel": "நிகழ்வுகள்",
     "upcomingLabel": "Upcoming",
-    "empty": "Events coming soon — check back shortly.",
+    "nextMass": "Next Mass",
+    "dateTimeLabel": "Date & Time",
+    "locationLabel": "Location",
+    "empty": "No upcoming events — check back later.",
     "homeDontMiss": "Don't Miss",
     "homeUpcoming": "Upcoming Event"
   },
