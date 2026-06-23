@@ -102,8 +102,8 @@ The footer (every page) has a **monthly newsletter** signup. Subscribers are sav
 
 Until `newsletterEndpoint` is set, the form still renders and thanks the user, but nothing is saved. The site posts `{ email }`; the script appends `[timestamp, email, status]` and skips duplicates.
 
-**Send a newsletter — `apps-script/newsletter-send.gs` (scaffold, for later):**
-Reads the newsletter from a Google Doc and emails all subscribers, with guardrails so an accidental run can't blast email: it sends only when `NEWSLETTER_ARMED = "true"`, when at least 24 days have passed since the last send (`MIN_DAYS_BETWEEN`), and when the Doc is non-empty — then it disarms itself. Unsubscribe is handled by a footer line in the email (people can also unsubscribe from their mail client).
+**Send a newsletter — `apps-script/newsletter-send.gs` (automatic, Drive-folder driven):**
+Drop this month's newsletter as a Google Doc into a dedicated Drive folder; a time-driven trigger picks up the newest Doc and emails it to every subscriber, then records it so it's never sent twice. Setup: Script Properties `SHEET_ID` (subscribers sheet) + `NEWSLETTER_FOLDER_ID` (the Drive folder), and a time-driven trigger on `checkAndSendNewsletter` (Hour/Day timer). Guardrails so an accidental run can't blast email: never sends the same Doc twice (`LAST_SENT_DOC_ID`), at least `MIN_DAYS_BETWEEN` (24) days between sends, and the Doc must be unedited for `MIN_SETTLE_MINUTES` (30) so a draft you're still writing won't go out. Unsubscribe is a footer line in each email (recipients can also unsubscribe from their mail client).
 
 ---
 

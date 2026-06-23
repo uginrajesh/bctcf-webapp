@@ -23,7 +23,8 @@ export const SITE = {
   },
   // Apps Script Web App URL that saves newsletter subscriber emails to a Google
   // Sheet (see apps-script/newsletter-subscribe.gs). Empty = signup disabled.
-  newsletterEndpoint: '',
+  newsletterEndpoint:
+    'https://script.google.com/macros/s/AKfycbz4FpnMw92z1eD8rv0qRv5TFqGThEC_edOLrtRtJKCwO4vgS-kj3ysSbFqKG2QPXgX6pQ/exec',
   // Google Form: Mass availability + prayer intentions
   prayerFormUrl:
     'https://docs.google.com/forms/d/e/1FAIpQLSeIUMEFveFcGgmwFVVRWl16Vricy25O7uh7uyctkFmvkWP6VA/viewform',
