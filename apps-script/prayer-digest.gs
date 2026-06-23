@@ -8,8 +8,8 @@
 var MASS_KEYWORD = 'holy mass';
 var SHEET_NAME = 'Form Responses 1';
 var TIMESTAMP_COL = 0;     // column A = submission timestamp
-var FAMILY_NAME_COL = 1;   // column with the family name  ← set to your form's column
-var INTENTION_COL = 2;     // column with the prayer intention text  ← set to your form's column
+var FAMILY_NAME_COL = 1;   // column B = "Name"  ← set to your form's column
+var INTENTION_COL = 6;     // column G = "personal intentions"  ← set to your form's column
 
 // Auto-print (disabled). Leave '' to keep it off. To enable, set this to the
 // printer's email-to-print address (HP ePrint / Epson Email Print / etc.) and
