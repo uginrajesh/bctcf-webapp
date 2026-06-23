@@ -49,7 +49,7 @@ export function NextMass({ event }: { event: CalendarEvent }) {
           <div className="min-h-[12rem] overflow-hidden md:border-l md:border-brand-creamDark">
             <iframe
               src={`https://www.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`}
-              title={`${t('nextMass')} — ${event.location}`}
+              title={`${t('nextMass')} - ${event.location}`}
               className="h-full min-h-[12rem] w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

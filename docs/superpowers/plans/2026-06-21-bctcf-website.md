@@ -12,11 +12,11 @@
 
 - **Node.js:** v24.17.0, npm 11.13.0 (installed at `C:\Program Files\nodejs`). When the project `node`/`npm` are not on PATH in a fresh shell, prefix with that path.
 - **Locales:** exactly `en` (default) and `ta`. Every page exists in both. Language toggle top-right on every page.
-- **Role term:** always "Coordinator(s)" — never "board member(s)".
+- **Role term:** always "Coordinator(s)" - never "board member(s)".
 - **Community email / hub:** `bctamilcatholicfamily@gmail.com`.
 - **Palette:** Royal Blue `#1e3a8a`, Gold `#b8860b`, Warm Orange `#f59e0b`, Soft Yellow `#ffe9a8`, Cream surfaces `#fbf7ed` / `#fffdf7`, White. No neon, no dark/black-dominant backgrounds.
 - **Visual direction (locked):** gradient hero/banners (royal-blue → gold) + serif-heading, parchment, gold-bottom-underline cards.
-- **Mass-event keyword:** calendar events representing Mass are titled with the keyword **"Holy Mass"** — both the site (tagging) and the digest script key on this.
+- **Mass-event keyword:** calendar events representing Mass are titled with the keyword **"Holy Mass"** - both the site (tagging) and the digest script key on this.
 - **Fonts:** Inter (English), Noto Sans Tamil (Tamil).
 - **Secrets:** Google API key, Apps Script Web App URL, and shared secret token live only in environment variables (`.env.local` locally, Vercel env in prod). Never sent to the browser; never committed.
 - **No public exposure of personal data:** prayer intentions and member submissions are never rendered on the site.
@@ -27,29 +27,29 @@
 ## File Structure
 
 **Config / root**
-- `package.json`, `next.config.mjs`, `tsconfig.json`, `tailwind.config.ts`, `postcss.config.mjs` — project + build config
-- `vitest.config.ts`, `vitest.setup.ts` — test config
-- `.env.local` (gitignored), `.env.example` (committed) — environment variables
-- `middleware.ts` — next-intl locale routing
-- `README.md` — setup + Apps Script deployment notes
+- `package.json`, `next.config.mjs`, `tsconfig.json`, `tailwind.config.ts`, `postcss.config.mjs` - project + build config
+- `vitest.config.ts`, `vitest.setup.ts` - test config
+- `.env.local` (gitignored), `.env.example` (committed) - environment variables
+- `middleware.ts` - next-intl locale routing
+- `README.md` - setup + Apps Script deployment notes
 
 **i18n**
-- `src/i18n/routing.ts` — locale list + routing config
-- `src/i18n/request.ts` — per-request message loading
-- `src/messages/en.json`, `src/messages/ta.json` — all UI strings
+- `src/i18n/routing.ts` - locale list + routing config
+- `src/i18n/request.ts` - per-request message loading
+- `src/messages/en.json`, `src/messages/ta.json` - all UI strings
 
 **App / routes**
-- `src/app/[locale]/layout.tsx` — root locale layout (fonts, Header, Footer)
-- `src/app/[locale]/page.tsx` — Home
+- `src/app/[locale]/layout.tsx` - root locale layout (fonts, Header, Footer)
+- `src/app/[locale]/page.tsx` - Home
 - `src/app/[locale]/about/page.tsx`
 - `src/app/[locale]/events/page.tsx`
 - `src/app/[locale]/prayer-requests/page.tsx`
 - `src/app/[locale]/new-members/page.tsx`
 - `src/app/[locale]/socials/page.tsx`
 - `src/app/[locale]/contact/page.tsx`
-- `src/app/[locale]/not-found.tsx` — styled 404
-- `src/app/api/new-member/route.ts` — form relay to Apps Script
-- `src/app/globals.css` — Tailwind layers + base styles
+- `src/app/[locale]/not-found.tsx` - styled 404
+- `src/app/api/new-member/route.ts` - form relay to Apps Script
+- `src/app/globals.css` - Tailwind layers + base styles
 
 **Components**
 - `src/components/layout/Header.tsx`, `Footer.tsx`, `LanguageToggle.tsx`, `MobileNav.tsx`
@@ -57,16 +57,16 @@
 - `src/components/sections/Hero.tsx`, `MissionCards.tsx`, `UpcomingEvent.tsx`, `QuickAccess.tsx`, `Announcements.tsx`, `EventList.tsx`, `NewMemberForm.tsx`, `SocialCards.tsx`
 
 **Lib / data**
-- `src/lib/google-calendar.ts` — Calendar API client + event shaping
-- `src/lib/rate-limit.ts` — in-memory rate limiter for the API route
-- `src/data/announcements.json` — Home-page announcements
-- `src/config/site.ts` — social URLs, email, map embed, nav definition
+- `src/lib/google-calendar.ts` - Calendar API client + event shaping
+- `src/lib/rate-limit.ts` - in-memory rate limiter for the API route
+- `src/data/announcements.json` - Home-page announcements
+- `src/config/site.ts` - social URLs, email, map embed, nav definition
 
 **Google-side (in repo for version control, deployed manually to Apps Script)**
 - `apps-script/new-member-receiver.gs`
 - `apps-script/prayer-digest.gs`
-- `apps-script/digest-window.test.ts` — unit test for the pure date-window logic (mirrored in repo)
-- `src/lib/digest-window.ts` — the pure window-calculation function, unit-tested here and copied into the `.gs` file
+- `apps-script/digest-window.test.ts` - unit test for the pure date-window logic (mirrored in repo)
+- `src/lib/digest-window.ts` - the pure window-calculation function, unit-tested here and copied into the `.gs` file
 
 ---
 
@@ -238,14 +238,14 @@ git branch --show-current
 
 Expected: `origin` points to the new GitHub repo; current branch `main`.
 
-> No commit step — this task only publishes existing commits.
+> No commit step - this task only publishes existing commits.
 
 ---
 
 ## Task 4: Connect Vercel and first deploy
 
 **Files:**
-- Create: `vercel.json` (only if needed for overrides — default Next.js detection usually needs none).
+- Create: `vercel.json` (only if needed for overrides - default Next.js detection usually needs none).
 
 **Interfaces:**
 - Produces: a live `*.vercel.app` URL auto-deploying on push to `main`.
@@ -281,7 +281,7 @@ Expected: a preview URL is printed and loads the default app.
 
 In the Vercel dashboard (user action), import/link the `bctcf-webapp` GitHub repo so pushes to `main` auto-deploy to production. Confirm the production domain (`*.vercel.app`) loads.
 
-> Custom domain `bctamilcatholicfamily.ca` is added later, after community feedback — out of scope for this plan.
+> Custom domain `bctamilcatholicfamily.ca` is added later, after community feedback - out of scope for this plan.
 
 > No commit step unless `vercel.json` was created; if so: `git add vercel.json && git commit -m "chore: add Vercel config"`.
 
@@ -608,10 +608,10 @@ git commit -m "feat: add site config and nav definition"
 
 **Interfaces:**
 - Produces:
-  - `PageBanner({ title, tamilLabel }: { title: string; tamilLabel?: string })` — gradient banner with optional Tamil eyebrow line.
-  - `Card({ title, children, icon }: { title?: string; children: React.ReactNode; icon?: React.ReactNode })` — parchment card, serif heading, gold bottom-underline.
-  - `Section({ label, children, className }: { label?: string; children: React.ReactNode; className?: string })` — padded content block with optional gold eyebrow label.
-  - `Button({ href, children, variant }: { href?: string; children: React.ReactNode; variant?: 'solid'|'outline' })` — renders an `<a>` when `href` given, else `<button>`.
+  - `PageBanner({ title, tamilLabel }: { title: string; tamilLabel?: string })` - gradient banner with optional Tamil eyebrow line.
+  - `Card({ title, children, icon }: { title?: string; children: React.ReactNode; icon?: React.ReactNode })` - parchment card, serif heading, gold bottom-underline.
+  - `Section({ label, children, className }: { label?: string; children: React.ReactNode; className?: string })` - padded content block with optional gold eyebrow label.
+  - `Button({ href, children, variant }: { href?: string; children: React.ReactNode; variant?: 'solid'|'outline' })` - renders an `<a>` when `href` given, else `<button>`.
 
 - [ ] **Step 1: Write failing test for PageBanner**
 
@@ -1014,7 +1014,7 @@ Add a `home` block to both message files. `en.json`:
 "home": {
   "heroWelcomeTa": "அன்புடன் வரவேற்கிறோம்",
   "heroHeading": "Welcome to Our Family",
-  "heroBody": "A warm spiritual home for Tamil Catholic families across British Columbia — rooted in faith, family, and fellowship.",
+  "heroBody": "A warm spiritual home for Tamil Catholic families across British Columbia - rooted in faith, family, and fellowship.",
   "welcomeTitle": "A Word of Welcome",
   "welcomeBody": "Whether you are a long-time member or a newcomer to British Columbia, you have a place with us. We gather in worship, support one another as families, and celebrate our Tamil Catholic heritage together.",
   "ourHeart": "Our Heart",
@@ -1036,7 +1036,7 @@ Add a `home` block to both message files. `en.json`:
 "home": {
   "heroWelcomeTa": "அன்புடன் வரவேற்கிறோம்",
   "heroHeading": "எங்கள் குடும்பத்திற்கு வரவேற்கிறோம்",
-  "heroBody": "பிரிட்டிஷ் கொலம்பியா முழுவதும் உள்ள தமிழ் கத்தோலிக்க குடும்பங்களுக்கு ஒரு அன்பான ஆன்மீக இல்லம் — விசுவாசம், குடும்பம், நட்புறவில் வேரூன்றியது.",
+  "heroBody": "பிரிட்டிஷ் கொலம்பியா முழுவதும் உள்ள தமிழ் கத்தோலிக்க குடும்பங்களுக்கு ஒரு அன்பான ஆன்மீக இல்லம் - விசுவாசம், குடும்பம், நட்புறவில் வேரூன்றியது.",
   "welcomeTitle": "வரவேற்பு வார்த்தை",
   "welcomeBody": "நீங்கள் நீண்டகால உறுப்பினராக இருந்தாலும் அல்லது பிரிட்டிஷ் கொலம்பியாவிற்கு புதியவராக இருந்தாலும், எங்களுடன் உங்களுக்கு இடம் உண்டு.",
   "ourHeart": "எங்கள் இதயம்",
@@ -1148,7 +1148,7 @@ export function QuickAccess() {
   "items": [
     {
       "date": "2026-06",
-      "title": { "en": "Monthly Tamil Mass — second Saturday", "ta": "மாதாந்திர தமிழ் திருப்பலி — இரண்டாவது சனிக்கிழமை" },
+      "title": { "en": "Monthly Tamil Mass - second Saturday", "ta": "மாதாந்திர தமிழ் திருப்பலி - இரண்டாவது சனிக்கிழமை" },
       "body": { "en": "Join us this month for Holy Mass followed by community fellowship.", "ta": "இந்த மாதம் திருப்பலியிலும் அதைத் தொடர்ந்து சமூக நட்புறவிலும் எங்களுடன் இணையுங்கள்." }
     },
     {
@@ -1257,8 +1257,8 @@ git commit -m "feat: build Home page (hero, mission, quick access, announcements
 - Consumes: env `GOOGLE_CALENDAR_API_KEY`, `GOOGLE_CALENDAR_ID`.
 - Produces:
   - `type CalendarEvent = { id: string; title: string; description: string; location: string; start: string; isMass: boolean }`
-  - `async function getUpcomingEvents(max?: number): Promise<CalendarEvent[]>` — returns `[]` on any error (never throws).
-  - `function mapItem(item: GoogleEventItem): CalendarEvent` — pure mapper; `isMass` true when the title contains "Holy Mass" (case-insensitive).
+  - `async function getUpcomingEvents(max?: number): Promise<CalendarEvent[]>` - returns `[]` on any error (never throws).
+  - `function mapItem(item: GoogleEventItem): CalendarEvent` - pure mapper; `isMass` true when the title contains "Holy Mass" (case-insensitive).
 
 - [ ] **Step 1: Create env files**
 
@@ -1271,7 +1271,7 @@ APPS_SCRIPT_URL=
 APPS_SCRIPT_SECRET=
 ```
 
-`.env.local` (gitignored) — same keys, with the user's real values filled in. For local dev the calendar may be left blank (the client returns `[]`, exercising the empty state).
+`.env.local` (gitignored) - same keys, with the user's real values filled in. For local dev the calendar may be left blank (the client returns `[]`, exercising the empty state).
 
 - [ ] **Step 2: Write failing test for `mapItem`**
 
@@ -1371,7 +1371,7 @@ export async function getUpcomingEvents(max = 10): Promise<CalendarEvent[]> {
 }
 ```
 
-> `new Date()` here runs at request time in the Next.js server (allowed) — this is application runtime, not a Workflow script.
+> `new Date()` here runs at request time in the Next.js server (allowed) - this is application runtime, not a Workflow script.
 
 - [ ] **Step 5: Run test, verify pass**
 
@@ -1401,8 +1401,8 @@ git commit -m "feat: add Google Calendar client with Mass detection"
 **Interfaces:**
 - Consumes: `getUpcomingEvents`, `CalendarEvent` (Task 10); `PageBanner`, `Section` (Task 7).
 - Produces:
-  - `EventList({ events }: { events: CalendarEvent[] })` — renders date-badge cards; shows the empty-state message when `events` is empty.
-  - `UpcomingEvent({ event }: { event: CalendarEvent | null })` — featured card for Home; renders nothing if `null`.
+  - `EventList({ events }: { events: CalendarEvent[] })` - renders date-badge cards; shows the empty-state message when `events` is empty.
+  - `UpcomingEvent({ event }: { event: CalendarEvent | null })` - featured card for Home; renders nothing if `null`.
   - `formatEventDate(iso: string, locale: 'en'|'ta'): { day: string; month: string; time: string }` exported from `EventList.tsx`.
 
 - [ ] **Step 1: Add events translation keys**
@@ -1413,7 +1413,7 @@ git commit -m "feat: add Google Calendar client with Mass detection"
 "events": {
   "title": "Events", "tamilLabel": "நிகழ்வுகள்",
   "upcomingLabel": "Upcoming",
-  "empty": "Events coming soon — check back shortly.",
+  "empty": "Events coming soon - check back shortly.",
   "homeDontMiss": "Don't Miss", "homeUpcoming": "Upcoming Event"
 }
 ```
@@ -1424,7 +1424,7 @@ git commit -m "feat: add Google Calendar client with Mass detection"
 "events": {
   "title": "நிகழ்வுகள்", "tamilLabel": "நிகழ்வுகள்",
   "upcomingLabel": "வரவிருப்பவை",
-  "empty": "நிகழ்வுகள் விரைவில் வரும் — சிறிது நேரம் கழித்து பார்க்கவும்.",
+  "empty": "நிகழ்வுகள் விரைவில் வரும் - சிறிது நேரம் கழித்து பார்க்கவும்.",
   "homeDontMiss": "தவறவிடாதீர்கள்", "homeUpcoming": "வரவிருக்கும் நிகழ்வு"
 }
 ```
@@ -1440,7 +1440,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { EventList } from '../EventList'
 
 vi.mock('@/i18n/routing', () => ({ Link: (p: any) => <a {...p} /> }))
-const messages = { events: { empty: 'Events coming soon — check back shortly.', upcomingLabel: 'Upcoming' } }
+const messages = { events: { empty: 'Events coming soon - check back shortly.', upcomingLabel: 'Upcoming' } }
 const wrap = (ui: React.ReactNode) =>
   render(<NextIntlClientProvider locale="en" messages={messages}>{ui}</NextIntlClientProvider>)
 
@@ -1624,7 +1624,7 @@ export PATH="/c/Program Files/nodejs:$PATH"
 npm run dev
 ```
 
-With no calendar configured locally, `/en/events` shows the empty state and Home omits the highlight — both correct. Then:
+With no calendar configured locally, `/en/events` shows the empty state and Home omits the highlight - both correct. Then:
 
 ```bash
 npm run build
@@ -1667,7 +1667,7 @@ Add `about`, `prayer`, `socials`, `contact` blocks to both message files. `en.js
 "prayer": {
   "title": "Prayer Requests", "tamilLabel": "செப மன்றாட்டுகள்",
   "intro": "Share your intentions with our community. Our coordinators gather requests and our priests remember them at Holy Mass.",
-  "confidential": "Confidential — requests are seen only by coordinators and clergy, never published on the website.",
+  "confidential": "Confidential - requests are seen only by coordinators and clergy, never published on the website.",
   "cta": "Submit a Prayer Request"
 },
 "socials": {
@@ -1695,7 +1695,7 @@ Add `about`, `prayer`, `socials`, `contact` blocks to both message files. `en.js
 "prayer": {
   "title": "செப மன்றாட்டுகள்", "tamilLabel": "செப மன்றாட்டுகள்",
   "intro": "உங்கள் மன்றாட்டுகளை எங்கள் சமூகத்துடன் பகிருங்கள். எங்கள் ஒருங்கிணைப்பாளர்கள் மன்றாட்டுகளைச் சேகரித்து, எங்கள் அருட்தந்தையர்கள் திருப்பலியில் நினைவுகூருகிறார்கள்.",
-  "confidential": "இரகசியமானது — மன்றாட்டுகள் ஒருங்கிணைப்பாளர்கள் மற்றும் மறைப்பணியாளர்களால் மட்டுமே பார்க்கப்படும், வலைத்தளத்தில் வெளியிடப்படாது.",
+  "confidential": "இரகசியமானது - மன்றாட்டுகள் ஒருங்கிணைப்பாளர்கள் மற்றும் மறைப்பணியாளர்களால் மட்டுமே பார்க்கப்படும், வலைத்தளத்தில் வெளியிடப்படாது.",
   "cta": "ஒரு செப மன்றாட்டை சமர்ப்பியுங்கள்"
 },
 "socials": {
@@ -1914,7 +1914,7 @@ git commit -m "feat: add About, Prayer Requests, Socials, and Contact pages"
 - Test: `src/components/sections/__tests__/NewMemberForm.test.tsx`
 
 **Interfaces:**
-- Consumes: `Button` (Task 7); the API route `/api/new-member` (Task 14) — posts JSON `{ name, email, phone, familySize, heardFrom, website }` (`website` is the honeypot).
+- Consumes: `Button` (Task 7); the API route `/api/new-member` (Task 14) - posts JSON `{ name, email, phone, familySize, heardFrom, website }` (`website` is the honeypot).
 - Produces: `NewMemberForm` (client) with states idle → submitting → success/error; renders "What Happens Next" steps.
 
 - [ ] **Step 1: Add members translation keys**
@@ -2152,8 +2152,8 @@ git commit -m "feat: add New Members page with submission form"
 **Interfaces:**
 - Consumes: env `APPS_SCRIPT_URL`, `APPS_SCRIPT_SECRET`; honeypot field `website`.
 - Produces:
-  - `rateLimit(key: string, limit: number, windowMs: number): boolean` — returns `true` if allowed, `false` if over limit (in-memory).
-  - `POST(req: Request): Promise<Response>` — validates, honeypot-checks, rate-limits, relays to Apps Script. Returns `200 {ok:true}` on success; `400` invalid; `429` rate-limited; `502` upstream failure. Honeypot hit returns `200` (silently drop, don't tip off bots).
+  - `rateLimit(key: string, limit: number, windowMs: number): boolean` - returns `true` if allowed, `false` if over limit (in-memory).
+  - `POST(req: Request): Promise<Response>` - validates, honeypot-checks, rate-limits, relays to Apps Script. Returns `200 {ok:true}` on success; `400` invalid; `429` rate-limited; `502` upstream failure. Honeypot hit returns `200` (silently drop, don't tip off bots).
 
 - [ ] **Step 1: Write failing test for `rateLimit`**
 
@@ -2201,7 +2201,7 @@ export function rateLimit(key: string, limit: number, windowMs: number): boolean
 }
 ```
 
-> In-memory limiting is per-server-instance — adequate spam friction for a low-traffic community site. If abuse becomes a problem, swap for a durable store later.
+> In-memory limiting is per-server-instance - adequate spam friction for a low-traffic community site. If abuse becomes a problem, swap for a durable store later.
 
 - [ ] **Step 4: Run test, verify pass**
 
@@ -2420,7 +2420,7 @@ export default function NotFound() {
   return (
     <html lang="en">
       <body style={{ fontFamily: 'system-ui', textAlign: 'center', padding: '6rem' }}>
-        <h1>404 — Page not found</h1>
+        <h1>404 - Page not found</h1>
         <a href="/en">Go Home</a>
       </body>
     </html>
@@ -2446,11 +2446,11 @@ git commit -m "feat: add styled 404 pages"
 
 ---
 
-## Task 16: Apps Script — new-member receiver
+## Task 16: Apps Script - new-member receiver
 
 **Files:**
 - Create: `apps-script/new-member-receiver.gs`
-- Modify: `README.md` (deployment notes — created in Task 19; if not yet present, add a stub now)
+- Modify: `README.md` (deployment notes - created in Task 19; if not yet present, add a stub now)
 
 **Interfaces:**
 - Consumes: POST JSON `{ secret, name, email, phone, familySize, heardFrom }` from Task 14.
@@ -2534,7 +2534,7 @@ git commit -m "feat: add Apps Script new-member receiver"
 **Interfaces:**
 - Produces:
   - `type MassWindow = { sendToday: boolean; sinceISO: string | null; nextMassISO: string | null }`
-  - `computeDigestWindow(now: Date, massDatesISO: string[]): MassWindow` — given the current time and a sorted list of "Holy Mass" event start times, decide whether a Mass occurs within the next 24h (`sendToday`), and if so the window start = the most recent past Mass (`sinceISO`).
+  - `computeDigestWindow(now: Date, massDatesISO: string[]): MassWindow` - given the current time and a sorted list of "Holy Mass" event start times, decide whether a Mass occurs within the next 24h (`sendToday`), and if so the window start = the most recent past Mass (`sinceISO`).
 
 This pure function is unit-tested here and then copied verbatim into the Apps Script in Task 18 (Apps Script can't import from the repo).
 
@@ -2629,7 +2629,7 @@ git commit -m "feat: add prayer-digest window logic with tests"
 
 ---
 
-## Task 18: Apps Script — prayer digest job
+## Task 18: Apps Script - prayer digest job
 
 **Files:**
 - Create: `apps-script/prayer-digest.gs`
@@ -2644,7 +2644,7 @@ git commit -m "feat: add prayer-digest window logic with tests"
 // Deploy: bound to the prayer-requests responses Sheet.
 // Set Script Property CALENDAR_ID to the community calendar id.
 // Triggers → Add trigger → sendPrayerDigestIfMassTomorrow →
-//   Time-driven → Day timer → 8pm–9pm.
+//   Time-driven → Day timer → 8pm-9pm.
 // Adjust SHEET_NAME, the timestamp/intention column indexes, and the
 // MASS_KEYWORD if your form/calendar differ.
 
@@ -2717,7 +2717,7 @@ function sendPrayerDigestIfMassTomorrow() {
 
   MailApp.sendEmail({
     to: 'bctamilcatholicfamily@gmail.com',
-    subject: 'Prayer Intentions for Holy Mass — ' + massDate,
+    subject: 'Prayer Intentions for Holy Mass - ' + massDate,
     body: [
       'Prayer intentions submitted since the last Mass, for ' + massDate + ':',
       '',
@@ -2806,5 +2806,5 @@ Expected: Vercel auto-deploys; the production `*.vercel.app` URL reflects the fi
 ## Self-Review Notes
 
 - **Spec coverage:** Home, About, Events, Prayer, New Members, Socials, Contact → Tasks 9, 11, 12, 13. Bilingual routing/toggle → Tasks 5, 8. Brand/visual direction → Tasks 5, 7. Google Calendar events + empty state → Tasks 10, 11. New-member form → Sheet + email with honeypot/rate-limit/secret → Tasks 13, 14, 16. Prayer form + calendar-driven digest (next & previous Mass from calendar, zero-skip) → Tasks 12, 17, 18. Error handling (empty calendar, form fail, Apps Script error log, 404) → Tasks 10, 11, 13, 14, 16, 15. Security (env secrets, honeypot, rate limit, shared token, no public PII) → Tasks 10, 14, 16. Coordinators terminology → Tasks 12, 13, 16. GitHub + Vercel setup, no Supabase → Tasks 3, 4. Maintenance (announcements.json, messages files) → Tasks 9, 5. Open Items tracked → Tasks 6, 8, 19.
-- **Type consistency:** `CalendarEvent` shape and `getUpcomingEvents`/`mapItem` signatures consistent across Tasks 10–11. `computeDigestWindow`/`MassWindow` consistent across Tasks 17–18. API payload `{name,email,phone,familySize,heardFrom,website}` consistent across Tasks 13–14. `NavKey`/`NAV_ITEMS`/`SITE` consistent across Tasks 6, 8, 12.
-- **Placeholders:** the only `TODO(content)` markers are genuine community-supplied data (URLs, copy, photos), each tracked in the Task 19 launch checklist — not unfinished code.
+- **Type consistency:** `CalendarEvent` shape and `getUpcomingEvents`/`mapItem` signatures consistent across Tasks 10-11. `computeDigestWindow`/`MassWindow` consistent across Tasks 17-18. API payload `{name,email,phone,familySize,heardFrom,website}` consistent across Tasks 13-14. `NavKey`/`NAV_ITEMS`/`SITE` consistent across Tasks 6, 8, 12.
+- **Placeholders:** the only `TODO(content)` markers are genuine community-supplied data (URLs, copy, photos), each tracked in the Task 19 launch checklist - not unfinished code.

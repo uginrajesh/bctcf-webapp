@@ -22,14 +22,14 @@
     "nextMass": "Next Mass",
     "dateTimeLabel": "Date & Time",
     "locationLabel": "Location",
-    "empty": "No upcoming events — check back later.",
+    "empty": "No upcoming events - check back later.",
     "homeDontMiss": "Don't Miss",
     "homeUpcoming": "Upcoming Event"
   },
   "home": {
     "heroWelcomeTa": "அன்புடன் வரவேற்கிறோம்",
     "heroHeading": "Welcome to Our Family",
-    "heroBody": "A warm spiritual home for Tamil Catholic families across British Columbia — rooted in faith, family, and fellowship.",
+    "heroBody": "A warm spiritual home for Tamil Catholic families across British Columbia - rooted in faith, family, and fellowship.",
     "welcomeTitle": "A Word of Welcome",
     "welcomeBody": "Whether you are a long-time member or a newcomer to British Columbia, you have a place with us. We gather in worship, support one another as families, and celebrate our Tamil Catholic heritage together.",
     "ourHeart": "Our Heart",
@@ -85,7 +85,7 @@
     "title": "Prayer Requests",
     "tamilLabel": "செப மன்றாட்டுகள்",
     "intro": "Share your intentions with our community. Our coordinators gather requests and our priests remember them at Holy Mass.",
-    "confidential": "Confidential — requests are seen only by coordinators and clergy, never published on the website."
+    "confidential": "Confidential - requests are seen only by coordinators and clergy, never published on the website."
   },
   "socials": {
     "title": "Socials",

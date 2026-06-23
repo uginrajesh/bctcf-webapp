@@ -1,4 +1,4 @@
-# BC Tamil Catholic Family Website — Design Spec
+# BC Tamil Catholic Family Website - Design Spec
 
 **Date:** 2026-06-21
 **Status:** Approved design, ready for implementation planning
@@ -10,7 +10,7 @@
 
 A modern, warm, bilingual (English + Tamil) community website for **BC Tamil Catholic Family (BCTCF)**, a Tamil-speaking Catholic community in British Columbia, Canada.
 
-The site is the community's primary online presence. It provides information about the community, displays upcoming events, accepts prayer requests and new-member registrations, and links to social channels. It must feel warm, family-oriented, and faith-centered — never corporate or institutional — and must be easy for a non-technical maintainer to keep current.
+The site is the community's primary online presence. It provides information about the community, displays upcoming events, accepts prayer requests and new-member registrations, and links to social channels. It must feel warm, family-oriented, and faith-centered - never corporate or institutional - and must be easy for a non-technical maintainer to keep current.
 
 ### Goals
 - Bilingual from day one; every page available in English and Tamil.
@@ -29,9 +29,9 @@ The site is the community's primary online presence. It provides information abo
 
 ## 2. Roles & Terminology
 
-- **Coordinators** — the ~9 volunteers who run community activities and approve new members. They share access to the community Google account. (This replaces the earlier term "board members".)
-- **Clergy / Priests** — receive the monthly prayer-request digest.
-- **Maintainer** — initially the project owner; later a tech-savvy volunteer or developer. Edits content files and redeploys.
+- **Coordinators** - the ~9 volunteers who run community activities and approve new members. They share access to the community Google account. (This replaces the earlier term "board members".)
+- **Clergy / Priests** - receive the monthly prayer-request digest.
+- **Maintainer** - initially the project owner; later a tech-savvy volunteer or developer. Edits content files and redeploys.
 
 ### Community Google Account
 A single shared account, `bctamilcatholicfamily@gmail.com`, is the hub for everything:
@@ -99,19 +99,19 @@ Routing is locale-prefixed; default locale English, Tamil one click away via a t
 ## 6. Pages
 
 ### Home
-1. **Hero** — gradient banner, logo halo, Tamil welcome + English headline, short tagline, one CTA ("Join Our Family").
-2. **Welcome** — short bilingual message from the community.
-3. **Mission snapshot** — three cards: Faith · Family · Community.
-4. **Upcoming event highlight** — the next event from Google Calendar as a featured card.
-5. **Quick access** — four parchment cards: Prayer Requests · New Members · Events · Socials.
-6. **Latest announcements** — 2–3 pinned text updates from a data file.
+1. **Hero** - gradient banner, logo halo, Tamil welcome + English headline, short tagline, one CTA ("Join Our Family").
+2. **Welcome** - short bilingual message from the community.
+3. **Mission snapshot** - three cards: Faith · Family · Community.
+4. **Upcoming event highlight** - the next event from Google Calendar as a featured card.
+5. **Quick access** - four parchment cards: Prayer Requests · New Members · Events · Socials.
+6. **Latest announcements** - 2-3 pinned text updates from a data file.
 
 ### About Us
 Our Story · Our Mission · Our Vision · Core Values (Faith, Family, Community, Service, Tamil Heritage). Leadership/coordinators section optional.
 
 ### Events
 - Upcoming events pulled live from Google Calendar, rendered as branded date-badge cards (date, title, location, description).
-- Graceful empty state ("Events coming soon — check back shortly").
+- Graceful empty state ("Events coming soon - check back shortly").
 - Mass events use a consistent title convention (e.g. "Holy Mass") so the prayer-digest script can identify them.
 
 ### Prayer Requests
@@ -134,7 +134,7 @@ Community email (clickable `mailto:`), Google Maps embed placeholder for meeting
 
 ## 7. Integrations & Data Flow
 
-### 7.1 Events — Google Calendar → site
+### 7.1 Events - Google Calendar → site
 ```
 Community Google Calendar
    → Google Calendar API (read-only, server-side)
@@ -167,7 +167,7 @@ Google Apps Script, time-driven trigger (daily, ~8pm):
           → send to bctamilcatholicfamily@gmail.com
               → Gmail rule forwards to coordinators + clergy
 ```
-Mass dates are never hardcoded — both the next and previous Mass come from Google Calendar. If there are zero new requests, no email is sent. This logic lives entirely in Google Apps Script, independent of the website and Vercel.
+Mass dates are never hardcoded - both the next and previous Mass come from Google Calendar. If there are zero new requests, no email is sent. This logic lives entirely in Google Apps Script, independent of the website and Vercel.
 
 ### 7.4 Bilingual content
 - All UI strings live in `src/messages/en.json` and `src/messages/ta.json`.
@@ -258,8 +258,8 @@ bctcf-webapp/
 
 ## 13. Future Expansion (not in Phase 1)
 
-1. **Word of God mailer** — opt-in email sign-up stored in Google Sheets; periodic scripture content sent via Apps Script or a mail service (e.g. Mailchimp free tier).
-2. **SMS notifications** — coordinator-triggered broadcasts to opted-in members via a service such as Twilio.
+1. **Word of God mailer** - opt-in email sign-up stored in Google Sheets; periodic scripture content sent via Apps Script or a mail service (e.g. Mailchimp free tier).
+2. **SMS notifications** - coordinator-triggered broadcasts to opted-in members via a service such as Twilio.
 3. Gallery, parish resources, newsletters, event registration, volunteer signups, donations.
 
 These do not affect the Phase 1 architecture.
@@ -268,7 +268,7 @@ These do not affect the Phase 1 architecture.
 
 ## 14. Open Items to Resolve During Build
 
-1. **Header logo text** — keep or drop the adjacent community-name text depending on logo legibility at header size (decide at first render).
+1. **Header logo text** - keep or drop the adjacent community-name text depending on logo legibility at header size (decide at first render).
 2. Real hero/community photographs to replace gradient/emoji placeholders (authentic, family- and faith-focused; no corporate stock).
 3. Final social media URLs (Facebook, Instagram, YouTube, WhatsApp).
 4. Confirmed Mass-event naming convention in Google Calendar (proposed: "Holy Mass").

@@ -4,7 +4,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { EventList } from '../EventList'
 
 vi.mock('@/i18n/routing', () => ({ Link: (p: any) => <a {...p} /> }))
-const messages = { events: { empty: 'Events coming soon — check back shortly.', upcomingLabel: 'Upcoming' } }
+const messages = { events: { empty: 'Events coming soon - check back shortly.', upcomingLabel: 'Upcoming' } }
 const wrap = (ui: React.ReactNode) =>
   render(<NextIntlClientProvider locale="en" messages={messages}>{ui}</NextIntlClientProvider>)
 

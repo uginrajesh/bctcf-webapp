@@ -1,4 +1,4 @@
-# BC Tamil Catholic Family — Website
+# BC Tamil Catholic Family - Website
 
 A modern, warm, bilingual (English + Tamil) community website for **BC Tamil Catholic Family (BCTCF)**, a Tamil-speaking Catholic community in British Columbia, Canada.
 
@@ -8,7 +8,7 @@ A modern, warm, bilingual (English + Tamil) community website for **BC Tamil Cat
 - **Design spec:** `docs/superpowers/specs/2026-06-21-bctcf-website-design.md`
 - **Implementation plan:** `docs/superpowers/plans/2026-06-21-bctcf-website.md`
 
-No database. Events come from Google Calendar; New Members and Prayer Requests embed Google Forms; two Apps Scripts handle email automation — a calendar-driven prayer-intentions digest and an instant new-member notification.
+No database. Events come from Google Calendar; New Members and Prayer Requests embed Google Forms; two Apps Scripts handle email automation - a calendar-driven prayer-intentions digest and an instant new-member notification.
 
 ---
 
@@ -38,7 +38,7 @@ Routes are locale-prefixed: `/en/...` and `/ta/...`. The language toggle (top-ri
 | Events | Add/edit in the community **Google Calendar** | Site refreshes within ~60 min (ISR) |
 | Hero photos | Drop image files into `public/hero/` | Auto-included in the hero carousel on next push |
 | Home announcements | Edit `src/data/announcements.json` | Auto-deploys (~30s) |
-| About — Story / Mission / Vision, and all UI text | Edit `src/messages/en.json` / `src/messages/ta.json` | Auto-deploys |
+| About - Story / Mission / Vision, and all UI text | Edit `src/messages/en.json` / `src/messages/ta.json` | Auto-deploys |
 | Social / form / map links | Edit `src/config/site.ts` | Auto-deploys |
 | Prayer Requests / New Members | The pages **embed Google Forms** (see `src/config/site.ts`) | Edit the Google Form directly; no redeploy needed |
 
@@ -48,8 +48,8 @@ Routes are locale-prefixed: `/en/...` and `/ta/...`. The language toggle (top-ri
 
 Two community Google Forms are embedded directly in the site:
 
-- **New Members** — `SITE.newMemberFormUrl` in `src/config/site.ts` → embedded on `/new-members`.
-- **Prayer Requests + Mass availability + intentions** — `SITE.prayerFormUrl` → embedded on `/prayer-requests`.
+- **New Members** - `SITE.newMemberFormUrl` in `src/config/site.ts` → embedded on `/new-members`.
+- **Prayer Requests + Mass availability + intentions** - `SITE.prayerFormUrl` → embedded on `/prayer-requests`.
 
 Responses land in each Form's linked Google Sheet. To change a form, edit it in Google Forms (no code change); to point the site at a different form, update the URL in `src/config/site.ts`.
 
@@ -70,14 +70,14 @@ With the calendar vars unset, the Events page simply shows a friendly empty stat
 
 1. Open the Prayer Requests Google Form's responses Sheet → Extensions → Apps Script; paste the file.
 2. Script Properties → add `CALENDAR_ID` (the community calendar id).
-3. Triggers → Add trigger → `sendPrayerDigestIfMassTomorrow` → Time-driven → Day timer → 8pm–9pm.
+3. Triggers → Add trigger → `sendPrayerDigestIfMassTomorrow` → Time-driven → Day timer → 8pm-9pm.
 4. Mass events on the calendar must contain the keyword **"Holy Mass"** in their title.
 5. Adjust `SHEET_NAME` and the **column indexes** (`TIMESTAMP_COL`, `FAMILY_NAME_COL`, `INTENTION_COL`) at the top of the file to match your Form's response columns. Rows with an empty intention are skipped; each kept line is emailed as `Family Name - "Intention"` with a blank line between intentions.
 6. Test: temporarily add a "Holy Mass" event for tomorrow + a test form response, Run the function, confirm the digest email (and that with zero new intentions it sends a short "no new intentions" note rather than nothing).
 
 > The window-calculation logic in `prayer-digest.gs` is copied verbatim from `src/lib/digest-window.ts` (which is unit-tested). If you change one, change both.
 
-**Optional auto-print:** the digest can also print itself. It's **off by default** (`PRINTER_EMAIL = ''`). To enable, set `PRINTER_EMAIL` to your printer's email-to-print address (HP ePrint / Epson Email Print, etc.); the script attaches the intentions as a PDF and emails it there. Add that address to the printer's **allowed-senders** list so only this account can print. ePrint queues the job in the cloud, so it prints once the printer is on — it does not need to be on 24/7. (Enabling triggers a one-time Drive/Docs authorization prompt.)
+**Optional auto-print:** the digest can also print itself. It's **off by default** (`PRINTER_EMAIL = ''`). To enable, set `PRINTER_EMAIL` to your printer's email-to-print address (HP ePrint / Epson Email Print, etc.); the script attaches the intentions as a PDF and emails it there. Add that address to the printer's **allowed-senders** list so only this account can print. ePrint queues the job in the cloud, so it prints once the printer is on - it does not need to be on 24/7. (Enabling triggers a one-time Drive/Docs authorization prompt.)
 
 ## New-member notification Apps Script (Google-side, deployed manually)
 

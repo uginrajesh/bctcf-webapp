@@ -1,7 +1,7 @@
 // Deploy: bound to the prayer-requests responses Sheet.
 // Set Script Property CALENDAR_ID to the community calendar id.
 // Triggers → Add trigger → sendPrayerDigestIfMassTomorrow →
-//   Time-driven → Day timer → 8pm–9pm.
+//   Time-driven → Day timer → 8pm-9pm.
 // Adjust SHEET_NAME, the timestamp/intention column indexes, and the
 // MASS_KEYWORD if your form/calendar differ.
 
@@ -15,7 +15,7 @@ var INTENTION_COL = 6;     // column G = "personal intentions"  ← set to your 
 // printer's email-to-print address (HP ePrint / Epson Email Print / etc.) and
 // add that address to the printer's allowed-senders list so only this account
 // can print. ePrint services queue the job in the cloud, so the printout still
-// happens once the printer is powered on — it need not be on 24/7.
+// happens once the printer is powered on - it need not be on 24/7.
 var PRINTER_EMAIL = '';
 
 // --- copied verbatim from src/lib/digest-window.ts (keep in sync) ---
@@ -71,7 +71,7 @@ function sendPrayerDigestIfMassTomorrow() {
     var ts = new Date(rows[i][TIMESTAMP_COL]).getTime();
     if (isNaN(ts) || ts < since) continue;
     var text = String(rows[i][INTENTION_COL] || '').trim();
-    if (!text) continue; // no intention typed — skip this row
+    if (!text) continue; // no intention typed - skip this row
     var family = String(rows[i][FAMILY_NAME_COL] || '').trim();
     intentions.push((family ? family + ' - ' : '') + '"' + text + '"');
   }
@@ -95,7 +95,7 @@ function sendPrayerDigestIfMassTomorrow() {
     ].join('\n');
   }
 
-  var subject = 'Prayer Intentions for Holy Mass — ' + massDate;
+  var subject = 'Prayer Intentions for Holy Mass - ' + massDate;
 
   MailApp.sendEmail({
     to: 'bctamilcatholicfamily@gmail.com',
