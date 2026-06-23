@@ -10,15 +10,28 @@
 var NOTIFY_TO = 'bctamilcatholicfamily@gmail.com';
 
 function onNewMemberSubmit(e) {
-  if (!e || !e.namedValues) return;
-
   var lines = [];
   var nameForSubject = '';
-  for (var question in e.namedValues) {
-    var answer = e.namedValues[question].join(', ').trim();
-    if (!answer) continue;
+
+  function add(question, answer) {
+    answer = String(answer == null ? '' : answer).trim();
+    if (!answer) return;
     lines.push(question + ': ' + answer);
     if (!nameForSubject && /name/i.test(question)) nameForSubject = answer;
+  }
+
+  if (e && e.response && e.response.getItemResponses) {
+    // Form-bound "On form submit" trigger
+    var items = e.response.getItemResponses();
+    for (var i = 0; i < items.length; i++) {
+      var ans = items[i].getResponse();
+      add(items[i].getItem().getTitle(), Array.isArray(ans) ? ans.join(', ') : ans);
+    }
+  } else if (e && e.namedValues) {
+    // Sheet-bound "On form submit" trigger (fallback)
+    for (var q in e.namedValues) add(q, e.namedValues[q].join(', '));
+  } else {
+    return; // not a form-submit event
   }
 
   if (lines.length === 0) return; // nothing submitted
