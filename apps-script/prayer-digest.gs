@@ -7,8 +7,9 @@
 
 var MASS_KEYWORD = 'holy mass';
 var SHEET_NAME = 'Form Responses 1';
-var TIMESTAMP_COL = 0;   // column A = submission timestamp
-var INTENTION_COL = 1;   // column B = the prayer intention text
+var TIMESTAMP_COL = 0;     // column A = submission timestamp
+var FAMILY_NAME_COL = 1;   // column with the family name  ← set to your form's column
+var INTENTION_COL = 2;     // column with the prayer intention text  ← set to your form's column
 
 // --- copied verbatim from src/lib/digest-window.ts (keep in sync) ---
 function computeDigestWindow(now, massDatesISO) {
@@ -61,26 +62,35 @@ function sendPrayerDigestIfMassTomorrow() {
   var intentions = [];
   for (var i = 1; i < rows.length; i++) { // skip header
     var ts = new Date(rows[i][TIMESTAMP_COL]).getTime();
-    if (!isNaN(ts) && ts >= since) {
-      var text = String(rows[i][INTENTION_COL] || '').trim();
-      if (text) intentions.push('• ' + text);
-    }
+    if (isNaN(ts) || ts < since) continue;
+    var text = String(rows[i][INTENTION_COL] || '').trim();
+    if (!text) continue; // no intention typed — skip this row
+    var family = String(rows[i][FAMILY_NAME_COL] || '').trim();
+    intentions.push((family ? family + ' - ' : '') + '"' + text + '"');
   }
-
-  if (intentions.length === 0) return; // skip empty digest
 
   var massDate = Utilities.formatDate(new Date(w.nextMassISO),
     Session.getScriptTimeZone(), 'EEEE, MMMM d, yyyy');
 
+  var body;
+  if (intentions.length === 0) {
+    body = [
+      'Prayer Intentions for Holy Mass on ' + massDate + ':',
+      '',
+      'There are no new prayer intentions for this Mass.',
+    ].join('\n');
+  } else {
+    body = [
+      'Below are the personal intentions submitted by our families, to be ' +
+        'prayed for during Holy Mass on ' + massDate + ':',
+      '',
+      intentions.join('\n\n'),
+    ].join('\n');
+  }
+
   MailApp.sendEmail({
     to: 'bctamilcatholicfamily@gmail.com',
     subject: 'Prayer Intentions for Holy Mass — ' + massDate,
-    body: [
-      'Prayer intentions submitted since the last Mass, for ' + massDate + ':',
-      '',
-      intentions.join('\n'),
-      '',
-      '(' + intentions.length + ' intention(s). Gmail rules forward this to coordinators and clergy.)',
-    ].join('\n'),
+    body: body,
   });
 }

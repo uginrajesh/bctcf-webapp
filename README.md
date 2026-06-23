@@ -72,8 +72,8 @@ With the calendar vars unset, the Events page simply shows a friendly empty stat
 2. Script Properties → add `CALENDAR_ID` (the community calendar id).
 3. Triggers → Add trigger → `sendPrayerDigestIfMassTomorrow` → Time-driven → Day timer → 8pm–9pm.
 4. Mass events on the calendar must contain the keyword **"Holy Mass"** in their title.
-5. Adjust `SHEET_NAME` and the timestamp/intention **column indexes** at the top of the file to match your Form's response columns.
-6. Test: temporarily add a "Holy Mass" event for tomorrow + a test form response, Run the function, confirm the digest email (and that zero new intentions sends nothing).
+5. Adjust `SHEET_NAME` and the **column indexes** (`TIMESTAMP_COL`, `FAMILY_NAME_COL`, `INTENTION_COL`) at the top of the file to match your Form's response columns. Rows with an empty intention are skipped; each kept line is emailed as `Family Name - "Intention"` with a blank line between intentions.
+6. Test: temporarily add a "Holy Mass" event for tomorrow + a test form response, Run the function, confirm the digest email (and that with zero new intentions it sends a short "no new intentions" note rather than nothing).
 
 > The window-calculation logic in `prayer-digest.gs` is copied verbatim from `src/lib/digest-window.ts` (which is unit-tested). If you change one, change both.
 
