@@ -77,6 +77,8 @@ With the calendar vars unset, the Events page simply shows a friendly empty stat
 
 > The window-calculation logic in `prayer-digest.gs` is copied verbatim from `src/lib/digest-window.ts` (which is unit-tested). If you change one, change both.
 
+**Optional auto-print:** the digest can also print itself. It's **off by default** (`PRINTER_EMAIL = ''`). To enable, set `PRINTER_EMAIL` to your printer's email-to-print address (HP ePrint / Epson Email Print, etc.); the script attaches the intentions as a PDF and emails it there. Add that address to the printer's **allowed-senders** list so only this account can print. ePrint queues the job in the cloud, so it prints once the printer is on — it does not need to be on 24/7. (Enabling triggers a one-time Drive/Docs authorization prompt.)
+
 ## New-member notification Apps Script (Google-side, deployed manually)
 
 `apps-script/new-member-notify.gs` emails `bctamilcatholicfamily@gmail.com` the moment anyone submits the New Members form, listing every field so a coordinator can add the contact to the members group.

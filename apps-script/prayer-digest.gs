@@ -11,6 +11,13 @@ var TIMESTAMP_COL = 0;     // column A = submission timestamp
 var FAMILY_NAME_COL = 1;   // column with the family name  ← set to your form's column
 var INTENTION_COL = 2;     // column with the prayer intention text  ← set to your form's column
 
+// Auto-print (disabled). Leave '' to keep it off. To enable, set this to the
+// printer's email-to-print address (HP ePrint / Epson Email Print / etc.) and
+// add that address to the printer's allowed-senders list so only this account
+// can print. ePrint services queue the job in the cloud, so the printout still
+// happens once the printer is powered on — it need not be on 24/7.
+var PRINTER_EMAIL = '';
+
 // --- copied verbatim from src/lib/digest-window.ts (keep in sync) ---
 function computeDigestWindow(now, massDatesISO) {
   var nowMs = now.getTime();
@@ -88,9 +95,34 @@ function sendPrayerDigestIfMassTomorrow() {
     ].join('\n');
   }
 
+  var subject = 'Prayer Intentions for Holy Mass — ' + massDate;
+
   MailApp.sendEmail({
     to: 'bctamilcatholicfamily@gmail.com',
-    subject: 'Prayer Intentions for Holy Mass — ' + massDate,
+    subject: subject,
     body: body,
   });
+
+  // Auto-print the same content (only when enabled and there's something to print).
+  if (PRINTER_EMAIL && intentions.length > 0) {
+    printViaEmail(subject, body);
+  }
+}
+
+// Renders the digest text as a PDF and emails it to the printer's
+// email-to-print address. No-op unless PRINTER_EMAIL is set.
+function printViaEmail(title, body) {
+  if (!PRINTER_EMAIL) return;
+  var doc = DocumentApp.create(title);
+  doc.getBody().setText(body);
+  doc.saveAndClose();
+  var file = DriveApp.getFileById(doc.getId());
+  var pdf = file.getAs('application/pdf').setName(title + '.pdf');
+  MailApp.sendEmail({
+    to: PRINTER_EMAIL,
+    subject: title,
+    body: title,
+    attachments: [pdf],
+  });
+  file.setTrashed(true); // clean up the temporary Google Doc
 }
