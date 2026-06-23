@@ -11,7 +11,7 @@ export default async function ContactPage({ params }: { params: { locale: string
     <main>
       <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
       <Section>
-        <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
+        <div className="mx-auto max-w-md">
           <div className="rounded-lg border border-brand-creamDark bg-brand-cream p-5 text-sm text-slate-600">
             <h4 className="mb-2 font-serif text-brand-blue">{t('getInTouch')}</h4>
             <p className="mb-2 flex items-center gap-2">
@@ -22,15 +22,6 @@ export default async function ContactPage({ params }: { params: { locale: string
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" aria-hidden />
               <span>{t('location')}</span>
             </p>
-          </div>
-          <div className="overflow-hidden rounded-lg">
-            <iframe
-              src={SITE.mapEmbedUrl}
-              title="Meeting location map"
-              className="h-48 w-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
           </div>
         </div>
       </Section>

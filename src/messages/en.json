@@ -15,6 +15,17 @@
     "joinCta": "Join Our Family",
     "languageName": "தமிழ்"
   },
+  "footer": {
+    "resources": "Resources"
+  },
+  "newsletter": {
+    "title": "Monthly Newsletter",
+    "desc": "Get our monthly newsletter with reflections, events, and community news.",
+    "placeholder": "Your email address",
+    "button": "Subscribe",
+    "success": "Thank you! You're subscribed.",
+    "error": "Please enter a valid email address."
+  },
   "events": {
     "title": "Events",
     "tamilLabel": "நிகழ்வுகள்",
@@ -22,6 +33,8 @@
     "nextMass": "Next Mass",
     "dateTimeLabel": "Date & Time",
     "locationLabel": "Location",
+    "registerForMass": "Register for Mass",
+    "setReminder": "Set Reminder",
     "empty": "No upcoming events - check back later.",
     "homeDontMiss": "Don't Miss",
     "homeUpcoming": "Upcoming Event"

@@ -38,8 +38,9 @@ Routes are locale-prefixed: `/en/...` and `/ta/...`. The language toggle (top-ri
 | Events | Add/edit in the community **Google Calendar** | Site refreshes within ~60 min (ISR) |
 | Hero photos | Drop image files into `public/hero/` | Auto-included in the hero carousel on next push |
 | Home announcements | Edit `src/data/announcements.json` | Auto-deploys (~30s) |
+| Footer resource links | Edit `src/data/resources.json` (`label` + `url`) | Auto-deploys |
 | About - Story / Mission / Vision, and all UI text | Edit `src/messages/en.json` / `src/messages/ta.json` | Auto-deploys |
-| Social / form / map links | Edit `src/config/site.ts` | Auto-deploys |
+| Social / form / newsletter links | Edit `src/config/site.ts` | Auto-deploys |
 | Prayer Requests / New Members | The pages **embed Google Forms** (see `src/config/site.ts`) | Edit the Google Form directly; no redeploy needed |
 
 > **Coordinators** are the volunteers who hold the shared community Google account (`bctamilcatholicfamily@gmail.com`) and run activities. The role is always "coordinator(s)", never "board member(s)".
@@ -89,6 +90,21 @@ With the calendar vars unset, the Events page simply shows a friendly empty stat
 
 It reads fields generically, so adding/renaming Form questions later needs no code change.
 
+## Newsletter (subscribe + send)
+
+The footer (every page) has a **monthly newsletter** signup. Subscribers are saved to a Google Sheet via an Apps Script Web App; sending is a separate, guarded script for later.
+
+**Capture subscribers — `apps-script/newsletter-subscribe.gs`:**
+1. Create a Google Sheet (e.g. "Newsletter Subscribers"); copy its id from the URL.
+2. New Apps Script → paste the file → Script Properties → add `SHEET_ID`.
+3. Deploy → New deployment → **Web app** → Execute as **Me**, access **Anyone**.
+4. Paste the Web app URL into `SITE.newsletterEndpoint` in `src/config/site.ts`.
+
+Until `newsletterEndpoint` is set, the form still renders and thanks the user, but nothing is saved. The site posts `{ email }`; the script appends `[timestamp, email, status]` and skips duplicates.
+
+**Send a newsletter — `apps-script/newsletter-send.gs` (scaffold, for later):**
+Reads the newsletter from a Google Doc and emails all subscribers, with guardrails so an accidental run can't blast email: it sends only when `NEWSLETTER_ARMED = "true"`, when at least 24 days have passed since the last send (`MIN_DAYS_BETWEEN`), and when the Doc is non-empty — then it disarms itself. Unsubscribe is handled by a footer line in the email (people can also unsubscribe from their mail client).
+
 ---
 
 ## Launch checklist
@@ -96,7 +112,8 @@ It reads fields generically, so adding/renaming Form questions later needs no co
 Functional code is complete; these items are real-world content/config the community supplies before going public:
 
 - [ ] Real social media URLs (Facebook, Instagram, YouTube, WhatsApp) in `src/config/site.ts`
-- [ ] Real Google Maps embed URL in `src/config/site.ts` (`mapEmbedUrl`)
+- [ ] Newsletter subscribe endpoint (`newsletter-subscribe.gs` deployed; URL in `SITE.newsletterEndpoint`)
+- [ ] Footer resource links curated in `src/data/resources.json`
 - [ ] `GOOGLE_CALENDAR_API_KEY` + `GOOGLE_CALENDAR_ID` set in Vercel
 - [ ] Mass events titled with "Holy Mass" in the community calendar
 - [ ] `prayer-digest.gs` deployed with `CALENDAR_ID` + the daily trigger, and column indexes verified
@@ -116,10 +133,10 @@ src/
                        #   prayer-requests, new-members, socials, contact, 404)
   components/          # layout/, ui/ (primitives + FormEmbed), sections/
   lib/                 # google-calendar, digest-window, hero-images
-  data/                # announcements.json
-  config/              # site.ts (nav, email, socials, form URLs, map)
+  data/                # announcements.json, resources.json
+  config/              # site.ts (nav, email, socials, form URLs, newsletter)
   messages/            # en.json, ta.json
-apps-script/           # prayer-digest.gs + new-member-notify.gs (Google-side)
+apps-script/           # prayer-digest, new-member-notify, newsletter-* (Google-side)
 public/                # logo.svg, hero/ (carousel photos), images
 docs/superpowers/      # design spec + implementation plan
 ```

@@ -4,6 +4,7 @@ export type CalendarEvent = {
   description: string
   location: string
   start: string
+  end: string
   isMass: boolean
 }
 
@@ -13,6 +14,7 @@ type GoogleEventItem = {
   description?: string
   location?: string
   start?: { dateTime?: string; date?: string }
+  end?: { dateTime?: string; date?: string }
 }
 
 export function mapItem(item: GoogleEventItem): CalendarEvent {
@@ -23,6 +25,7 @@ export function mapItem(item: GoogleEventItem): CalendarEvent {
     description: item.description ?? '',
     location: item.location ?? '',
     start: item.start?.dateTime ?? item.start?.date ?? '',
+    end: item.end?.dateTime ?? item.end?.date ?? '',
     isMass: /holy mass/i.test(title),
   }
 }

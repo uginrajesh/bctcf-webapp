@@ -1,4 +1,5 @@
 import { useLocale, useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import type { CalendarEvent } from '@/lib/google-calendar'
 import { EVENT_TZ } from './EventList'
 
@@ -16,6 +17,33 @@ function formatFull(iso: string, locale: 'en' | 'ta') {
   }
   if (!timed) return d.toLocaleDateString(loc, dateOpts)
   return d.toLocaleString(loc, { ...dateOpts, hour: 'numeric', minute: '2-digit' })
+}
+
+// Google Calendar "Add to Calendar" template URL needs compact UTC timestamps:
+// timed -> YYYYMMDDTHHmmssZ, all-day -> YYYYMMDD.
+function gcalDate(iso: string) {
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  if (!iso.includes('T')) return iso.replace(/-/g, '')
+  return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')
+}
+
+function googleCalendarUrl(event: CalendarEvent) {
+  const start = gcalDate(event.start)
+  let end = gcalDate(event.end)
+  if (!end) {
+    end = event.start.includes('T')
+      ? gcalDate(new Date(new Date(event.start).getTime() + 60 * 60 * 1000).toISOString())
+      : start
+  }
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: event.title || 'Holy Mass',
+    dates: `${start}/${end}`,
+  })
+  if (event.location) params.set('location', event.location)
+  if (event.description) params.set('details', event.description)
+  return `https://calendar.google.com/calendar/render?${params.toString()}`
 }
 
 export function NextMass({ event }: { event: CalendarEvent }) {
@@ -56,6 +84,22 @@ export function NextMass({ event }: { event: CalendarEvent }) {
             />
           </div>
         )}
+      </div>
+      <div className="flex flex-wrap justify-center gap-3 border-t border-brand-creamDark px-6 py-5">
+        <Link
+          href="/prayer-requests"
+          className="rounded-full bg-brand-orange px-6 py-2.5 text-sm font-bold text-white shadow-sm transition hover:brightness-105"
+        >
+          {t('registerForMass')}
+        </Link>
+        <a
+          href={googleCalendarUrl(event)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-full border-2 border-brand-blue px-6 py-2.5 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+        >
+          {t('setReminder')}
+        </a>
       </div>
     </div>
   )

@@ -9,7 +9,7 @@ export function Header() {
   const t = useTranslations('nav')
   const tc = useTranslations('common')
   return (
-    <header className="relative flex items-center justify-between border-b border-slate-100 bg-white px-6 py-3">
+    <header className="sticky top-0 z-40 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-3 shadow-sm">
       <Link href="/" className="flex items-center gap-3">
         <Image src="/logo.svg" alt="BCTCF logo" width={52} height={52} priority />
         <span className="hidden text-sm font-bold leading-tight text-brand-blue sm:block">

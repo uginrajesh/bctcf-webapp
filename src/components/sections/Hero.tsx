@@ -9,7 +9,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
   const hasPhotos = images.length > 0
   return (
     <section
-      className={`relative overflow-hidden px-6 py-16 text-center text-white ${
+      className={`relative flex min-h-[32rem] flex-col items-center justify-center overflow-hidden px-6 py-16 text-center text-white ${
         hasPhotos ? 'bg-brand-blue' : 'bg-brand-gradient'
       }`}
     >

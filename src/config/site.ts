@@ -21,9 +21,9 @@ export const SITE = {
     youtube: 'https://youtube.com/',
     whatsapp: 'https://chat.whatsapp.com/',
   },
-  // TODO(content): replace with real Google Maps embed URL (Open Item #5)
-  mapEmbedUrl:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83000!2d-123.1!3d49.25',
+  // Apps Script Web App URL that saves newsletter subscriber emails to a Google
+  // Sheet (see apps-script/newsletter-subscribe.gs). Empty = signup disabled.
+  newsletterEndpoint: '',
   // Google Form: Mass availability + prayer intentions
   prayerFormUrl:
     'https://docs.google.com/forms/d/e/1FAIpQLSeIUMEFveFcGgmwFVVRWl16Vricy25O7uh7uyctkFmvkWP6VA/viewform',
