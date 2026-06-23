@@ -1,21 +1,25 @@
-// Newsletter SEND — automatic, Drive-folder driven.
-// Drop this month's newsletter as a Google Doc into a dedicated Drive folder;
-// a time-driven trigger picks up the newest Doc and emails it to every
-// subscriber, then records it so it is never sent twice.
+// Newsletter SEND — automatic, Drive-folder driven, with PDF attachment.
+// Each month, upload TWO files (same base name) to a dedicated Drive folder:
+//   - a Google Doc  e.g. "June 2026 Newsletter"        -> email subject + body
+//   - a PDF         e.g. "June 2026 Newsletter.pdf"    -> attached to the email
+// A time-driven trigger picks up the newest Doc, attaches the matching PDF,
+// emails every subscriber, then records it so it's never sent twice.
+//
+// (Write the newsletter locally, then upload both files. The Doc must be a
+//  Google Doc — when you upload a .docx, open it with Google Docs / let Drive
+//  convert it, or keep "Convert uploads" on in Drive settings.)
 //
 // Setup:
-//   Script Properties (Project Settings -> Script Properties):
+//   Script Properties:
 //     SHEET_ID             = the Newsletter Subscribers spreadsheet id
-//     NEWSLETTER_FOLDER_ID = the Drive folder you drop newsletter Docs into
-//   Trigger (clock icon -> Add trigger):
-//     Function: checkAndSendNewsletter | Time-driven | Hour/Day timer.
+//     NEWSLETTER_FOLDER_ID = the Drive folder you upload newsletter files into
+//   Trigger: checkAndSendNewsletter | Time-driven | Hour/Day timer.
 //   You can also Run checkAndSendNewsletter manually to send immediately.
 //
 // Guardrails (any failing one aborts and just logs why):
 //   1. Same Doc is never sent twice (tracks LAST_SENT_DOC_ID).
 //   2. At least MIN_DAYS_BETWEEN days since the last send.
-//   3. The Doc must have been left unedited for MIN_SETTLE_MINUTES — so a
-//      draft you are still writing won't go out.
+//   3. The Doc must be unedited for MIN_SETTLE_MINUTES — a draft won't go out.
 //   4. The Doc must be non-empty and there must be at least one subscriber.
 
 var SUBSCRIBERS_SHEET = 'Subscribers';
@@ -24,12 +28,13 @@ var MIN_SETTLE_MINUTES = 30;
 
 function checkAndSendNewsletter() {
   var props = PropertiesService.getScriptProperties();
-
   var folder = DriveApp.getFolderById(props.getProperty('NEWSLETTER_FOLDER_ID'));
-  var files = folder.getFilesByType(MimeType.GOOGLE_DOCS);
+
+  // Newest Google Doc = the email body source.
+  var docs = folder.getFilesByType(MimeType.GOOGLE_DOCS);
   var newest = null;
-  while (files.hasNext()) {
-    var f = files.next();
+  while (docs.hasNext()) {
+    var f = docs.next();
     if (!newest || f.getDateCreated() > newest.getDateCreated()) newest = f;
   }
   if (!newest) { Logger.log('Abort: no Google Doc in the folder.'); return; }
@@ -56,6 +61,12 @@ function checkAndSendNewsletter() {
   var body = doc.getBody().getText().trim();
   if (!body) { Logger.log('Abort: newsletter Doc is empty.'); return; }
 
+  // Matching PDF (same base name) becomes the attachment, if present.
+  var attachments = [];
+  var pdf = findPdfByBaseName(folder, baseName(newest.getName()));
+  if (pdf) attachments.push(pdf.getBlob());
+  else Logger.log('Note: no matching PDF for "' + newest.getName() + '"; sending without attachment.');
+
   var emails = getSubscribers(props.getProperty('SHEET_ID'));
   if (emails.length === 0) { Logger.log('Abort: no subscribers.'); return; }
 
@@ -66,12 +77,28 @@ function checkAndSendNewsletter() {
       subject: subject,
       body: body + unsubscribe,
       name: 'BC Tamil Catholic Family',
+      attachments: attachments,
     });
   });
 
   props.setProperty('LAST_SENT_DOC_ID', newest.getId());
   props.setProperty('LAST_NEWSLETTER_SENT', String(Date.now()));
-  Logger.log('Sent "' + subject + '" to ' + emails.length + ' subscriber(s).');
+  Logger.log('Sent "' + subject + '" to ' + emails.length + ' subscriber(s)' +
+    (attachments.length ? ' with PDF.' : ' (no PDF).'));
+}
+
+// Strips a trailing .gdoc/.doc/.docx/.pdf so the Doc and PDF can be matched.
+function baseName(name) {
+  return name.replace(/\.(gdoc|docx?|pdf)$/i, '').trim();
+}
+
+function findPdfByBaseName(folder, base) {
+  var pdfs = folder.getFilesByType(MimeType.PDF);
+  while (pdfs.hasNext()) {
+    var p = pdfs.next();
+    if (baseName(p.getName()).toLowerCase() === base.toLowerCase()) return p;
+  }
+  return null;
 }
 
 function getSubscribers(sheetId) {
