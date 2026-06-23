@@ -1,14 +1,9 @@
 {
   "items": [
     {
-      "date": "2026-06",
-      "title": { "en": "Monthly Tamil Mass — second Saturday", "ta": "மாதாந்திர தமிழ் திருப்பலி — இரண்டாவது சனிக்கிழமை" },
-      "body": { "en": "Join us this month for Holy Mass followed by community fellowship.", "ta": "இந்த மாதம் திருப்பலியிலும் அதைத் தொடர்ந்து சமூக நட்புறவிலும் எங்களுடன் இணையுங்கள்." }
-    },
-    {
-      "date": "2026-06",
-      "title": { "en": "New family welcome lunch", "ta": "புதிய குடும்ப வரவேற்பு மதிய உணவு" },
-      "body": { "en": "Newcomers to BC are warmly invited to our welcome lunch after Mass.", "ta": "பிரிட்டிஷ் கொலம்பியாவிற்கு புதியவர்கள் திருப்பலிக்குப் பின் எங்கள் வரவேற்பு மதிய உணவிற்கு அன்புடன் அழைக்கப்படுகிறார்கள்." }
+      "date": "June 28 2026",
+      "title": { "en": "Monthly Tamil Mass", "ta": "மாதாந்திர தமிழ் திருப்பலி" },
+      "body": { "en": "Join us this month for Holy Mass followed by community fellowship at Our Lady of Good Counsel Parish, Surrey.", "ta": "இந்த மாதம் திருப்பலியிலும் அதைத் தொடர்ந்து சமூக நட்புறவிலும் எங்களுடன் இணையுங்கள். இடம் Our Lady of Good Counsel Parish, Surrey" }
     }
   ]
 }
