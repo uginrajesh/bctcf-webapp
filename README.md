@@ -8,7 +8,7 @@ A modern, warm, bilingual (English + Tamil) community website for **BC Tamil Cat
 - **Design spec:** `docs/superpowers/specs/2026-06-21-bctcf-website-design.md`
 - **Implementation plan:** `docs/superpowers/plans/2026-06-21-bctcf-website.md`
 
-No database. Events come from Google Calendar; New Members and Prayer Requests embed Google Forms; a calendar-driven Apps Script emails a monthly prayer-intentions digest.
+No database. Events come from Google Calendar; New Members and Prayer Requests embed Google Forms; two Apps Scripts handle email automation — a calendar-driven prayer-intentions digest and an instant new-member notification.
 
 ---
 
@@ -77,6 +77,16 @@ With the calendar vars unset, the Events page simply shows a friendly empty stat
 
 > The window-calculation logic in `prayer-digest.gs` is copied verbatim from `src/lib/digest-window.ts` (which is unit-tested). If you change one, change both.
 
+## New-member notification Apps Script (Google-side, deployed manually)
+
+`apps-script/new-member-notify.gs` emails `bctamilcatholicfamily@gmail.com` the moment anyone submits the New Members form, listing every field so a coordinator can add the contact to the members group.
+
+1. Open the **New Members Google Form** → ⋮ (top-right) → **Script editor**; paste the file.
+2. Triggers → Add trigger → `onNewMemberSubmit` → Event source **From form** → **On form submit** → Save (authorize when prompted).
+3. Test: submit a test response and confirm the notification email arrives.
+
+It reads fields generically, so adding/renaming Form questions later needs no code change.
+
 ---
 
 ## Launch checklist
@@ -88,6 +98,7 @@ Functional code is complete; these items are real-world content/config the commu
 - [ ] `GOOGLE_CALENDAR_API_KEY` + `GOOGLE_CALENDAR_ID` set in Vercel
 - [ ] Mass events titled with "Holy Mass" in the community calendar
 - [ ] `prayer-digest.gs` deployed with `CALENDAR_ID` + the daily trigger, and column indexes verified
+- [ ] `new-member-notify.gs` deployed on the New Members form with an on-form-submit trigger
 - [ ] Hero photos added to `public/hero/`
 - [ ] Header logo text decision confirmed (keep/drop the community-name text beside the logo)
 - [ ] Welcome / Mission / Vision / Story copy finalized in both languages
@@ -106,7 +117,7 @@ src/
   data/                # announcements.json
   config/              # site.ts (nav, email, socials, form URLs, map)
   messages/            # en.json, ta.json
-apps-script/           # prayer-digest.gs (deployed manually, Google-side)
+apps-script/           # prayer-digest.gs + new-member-notify.gs (Google-side)
 public/                # logo.svg, hero/ (carousel photos), images
 docs/superpowers/      # design spec + implementation plan
 ```
