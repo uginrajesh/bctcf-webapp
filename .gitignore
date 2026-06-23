@@ -16,6 +16,9 @@ build/
 # Visual companion (brainstorming) artifacts
 .superpowers/
 
+# Local-only assistant guidelines (not committed)
+CLAUDE.md
+
 # OS / editor
 .DS_Store
 Thumbs.db
