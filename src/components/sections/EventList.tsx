@@ -1,14 +1,22 @@
 import { useLocale, useTranslations } from 'next-intl'
 import type { CalendarEvent } from '@/lib/google-calendar'
 
+// Always display events in BC local time, regardless of the server's timezone
+// (Vercel runs in UTC, which otherwise shifted 4pm PDT to 11pm).
+export const EVENT_TZ = 'America/Vancouver'
+
 export function formatEventDate(iso: string, locale: 'en' | 'ta') {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return { day: '', month: '', time: '' }
   const loc = locale === 'ta' ? 'ta-IN' : 'en-CA'
+  const timed = iso.includes('T')
+  // Date-only (all-day) events have no offset → render in UTC so the calendar
+  // date doesn't slip a day; timed events render in BC time.
+  const tz = timed ? EVENT_TZ : 'UTC'
   return {
-    day: d.toLocaleDateString(loc, { day: '2-digit' }),
-    month: d.toLocaleDateString(loc, { month: 'short' }),
-    time: iso.includes('T') ? d.toLocaleTimeString(loc, { hour: 'numeric', minute: '2-digit' }) : '',
+    day: d.toLocaleDateString(loc, { day: '2-digit', timeZone: tz }),
+    month: d.toLocaleDateString(loc, { month: 'short', timeZone: tz }),
+    time: timed ? d.toLocaleTimeString(loc, { hour: 'numeric', minute: '2-digit', timeZone: EVENT_TZ }) : '',
   }
 }
 

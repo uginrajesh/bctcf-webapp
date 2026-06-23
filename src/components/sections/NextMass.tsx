@@ -1,17 +1,20 @@
 import { useLocale, useTranslations } from 'next-intl'
 import type { CalendarEvent } from '@/lib/google-calendar'
+import { EVENT_TZ } from './EventList'
 
 function formatFull(iso: string, locale: 'en' | 'ta') {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return ''
   const loc = locale === 'ta' ? 'ta-IN' : 'en-CA'
+  const timed = iso.includes('T')
   const dateOpts: Intl.DateTimeFormatOptions = {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: timed ? EVENT_TZ : 'UTC',
   }
-  if (!iso.includes('T')) return d.toLocaleDateString(loc, dateOpts)
+  if (!timed) return d.toLocaleDateString(loc, dateOpts)
   return d.toLocaleString(loc, { ...dateOpts, hour: 'numeric', minute: '2-digit' })
 }
 
