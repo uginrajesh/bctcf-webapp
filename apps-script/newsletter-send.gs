@@ -26,6 +26,15 @@ var SUBSCRIBERS_SHEET = 'Subscribers';
 var MIN_DAYS_BETWEEN = 24;
 var MIN_SETTLE_MINUTES = 30;
 
+// true  -> the email body is the Google Doc's text (the PDF is also attached).
+// false -> the email body is the short GENERIC_BODY below, and readers open the
+//          attached PDF for the full newsletter.
+var INCLUDE_DOC_BODY = true;
+var GENERIC_BODY =
+  'Dear friends in Christ,\n\n' +
+  "Please find this month's BC Tamil Catholic Family newsletter attached.\n\n" +
+  'God bless,\nBC Tamil Catholic Family';
+
 function checkAndSendNewsletter() {
   var props = PropertiesService.getScriptProperties();
   var folder = DriveApp.getFolderById(props.getProperty('NEWSLETTER_FOLDER_ID'));
@@ -58,14 +67,24 @@ function checkAndSendNewsletter() {
 
   var doc = DocumentApp.openById(newest.getId());
   var subject = doc.getName();
-  var body = doc.getBody().getText().trim();
-  if (!body) { Logger.log('Abort: newsletter Doc is empty.'); return; }
+  var body;
+  if (INCLUDE_DOC_BODY) {
+    body = doc.getBody().getText().trim();
+    if (!body) { Logger.log('Abort: newsletter Doc is empty.'); return; }
+  } else {
+    body = GENERIC_BODY;
+  }
 
   // Matching PDF (same base name) becomes the attachment, if present.
   var attachments = [];
   var pdf = findPdfByBaseName(folder, baseName(newest.getName()));
   if (pdf) attachments.push(pdf.getBlob());
   else Logger.log('Note: no matching PDF for "' + newest.getName() + '"; sending without attachment.');
+
+  if (!INCLUDE_DOC_BODY && attachments.length === 0) {
+    Logger.log('Abort: generic body selected but no PDF attached — nothing to send.');
+    return;
+  }
 
   var emails = getSubscribers(props.getProperty('SHEET_ID'));
   if (emails.length === 0) { Logger.log('Abort: no subscribers.'); return; }
