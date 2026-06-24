@@ -73,7 +73,7 @@ function checkAndSendNewsletter() {
 
   var subject = baseName(newest.getName());
   var attachment = newest.getBlob();
-  var unsubscribe = '\n\n----\nTo unsubscribe, reply to this email with "unsubscribe".';
+  var unsubscribe = '\n\n----\nTo unsubscribe, reply to this email and we\'ll remove you from the list.';
   emails.forEach(function (email) {
     MailApp.sendEmail({
       to: email,
