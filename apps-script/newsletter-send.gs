@@ -13,6 +13,8 @@
 //   Script Properties:
 //     SHEET_ID             = the Newsletter Subscribers spreadsheet id
 //     NEWSLETTER_FOLDER_ID = the Drive folder you upload newsletter files into
+//     ARCHIVE_FOLDER_ID    = a subfolder; sent Doc + PDF are moved here after
+//                            sending (optional — omit to leave files in place)
 //   Trigger: checkAndSendNewsletter | Time-driven | Hour/Day timer.
 //   You can also Run checkAndSendNewsletter manually to send immediately.
 //
@@ -102,8 +104,19 @@ function checkAndSendNewsletter() {
 
   props.setProperty('LAST_SENT_DOC_ID', newest.getId());
   props.setProperty('LAST_NEWSLETTER_SENT', String(Date.now()));
+
+  // Move the sent Doc (and its PDF) into the Archive subfolder so the active
+  // folder only ever holds the next newsletter.
+  var archiveId = props.getProperty('ARCHIVE_FOLDER_ID');
+  if (archiveId) {
+    var archive = DriveApp.getFolderById(archiveId);
+    newest.moveTo(archive);
+    if (pdf) pdf.moveTo(archive);
+  }
+
   Logger.log('Sent "' + subject + '" to ' + emails.length + ' subscriber(s)' +
-    (attachments.length ? ' with PDF.' : ' (no PDF).'));
+    (attachments.length ? ' with PDF' : ' (no PDF)') +
+    (archiveId ? '; archived the files.' : '.'));
 }
 
 // Strips a trailing .gdoc/.doc/.docx/.pdf so the Doc and PDF can be matched.
