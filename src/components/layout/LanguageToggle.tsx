@@ -11,7 +11,7 @@ export function LanguageToggle() {
   return (
     <button
       onClick={() => router.replace(pathname, { locale: other })}
-      className="rounded-full border-[1.5px] border-brand-blue px-3 py-1 text-xs font-semibold text-brand-blue"
+      className="rounded-full border-[1.5px] border-brand-blue px-3 py-1 text-xs font-semibold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white"
       aria-label={`Switch to ${t('languageName')}`}
     >
       {locale === 'en' ? 'EN | தமிழ்' : 'தமிழ் | EN'}

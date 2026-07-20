@@ -20,11 +20,13 @@ export function QuickAccess() {
             <Link
               key={c.href}
               href={c.href}
-              className="rounded-lg border-b-[3px] border-brand-gold bg-white p-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="group rounded-2xl border border-brand-goldLine bg-white p-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <Icon className="mx-auto mb-2 h-8 w-8 text-brand-gold" />
+              <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue text-white transition group-hover:bg-brand-blueDark">
+                <Icon className="h-6 w-6" />
+              </span>
               <span className="block font-serif font-semibold text-brand-blue">{c.title}</span>
-              <span className="mt-1 block text-xs text-slate-400">{c.sub}</span>
+              <span className="mt-1 block text-xs text-slate-500">{c.sub}</span>
             </Link>
           )
         })}

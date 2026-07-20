@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BC Tamil Catholic Family — Design Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Mulish:wght@400;500;600;700&family=Noto+Serif+Tamil:wght@500;600;700&family=Catamaran:wght@400;500;600;700&family=Baloo+Thambi+2:wght@500;600;700&family=Mukta+Malar:wght@400;500;600;700&family=Hind+Madurai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #eef1f6; color: #1f2937; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* ============ CONTROL BAR ============ */
+  .controls {
+    position: sticky; top: 0; z-index: 50;
+    background: #0f172a; color: #fff;
+    padding: 14px 20px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  }
+  .controls .brand { font-weight: 700; font-size: 15px; letter-spacing: .3px; }
+  .controls .spacer { flex: 1; }
+  .tabs { display: flex; gap: 6px; background: rgba(255,255,255,.08); padding: 5px; border-radius: 999px; }
+  .tab { border: 0; cursor: pointer; background: transparent; color: #cbd5e1; font: inherit; font-weight: 600; font-size: 13px; padding: 8px 16px; border-radius: 999px; transition: all .2s; }
+  .tab:hover { color: #fff; }
+  .tab.active { background: #fff; color: #0f172a; }
+  .langbtn { border: 1px solid rgba(255,255,255,.3); cursor: pointer; background: transparent; color: #fff; font: inherit; font-weight: 600; font-size: 13px; padding: 8px 14px; border-radius: 8px; }
+  .langbtn:hover { background: rgba(255,255,255,.12); }
+
+  .stage { max-width: 1120px; margin: 24px auto; padding: 0 16px 60px; }
+  .panel { display: none; }
+  .panel.active { display: block; animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px);} to {opacity:1; transform:none;} }
+
+  .dirhead { margin: 6px 4px 16px; }
+  .dirhead h2 { font-size: 22px; font-weight: 700; }
+  .dirhead p { color: #64748b; font-size: 14px; margin-top: 4px; max-width: 720px; }
+
+  .frame { border-radius: 18px; overflow: hidden; box-shadow: 0 20px 60px -20px rgba(15,23,42,.35), 0 4px 12px rgba(15,23,42,.08); border: 1px solid rgba(15,23,42,.08); }
+
+  /* shared mock header */
+  .m-nav { display: flex; align-items: center; gap: 18px; padding: 16px 28px; }
+  .m-logo { display: flex; align-items: center; gap: 12px; }
+  .m-logo svg { width: 46px; height: 46px; border-radius: 50%; }
+  .m-logo .nm { line-height: 1.15; }
+  .m-links { display: flex; gap: 22px; margin-left: auto; font-size: 14px; font-weight: 600; }
+  .m-links a { text-decoration: none; }
+  .m-cta { padding: 9px 18px; border-radius: 999px; font-weight: 700; font-size: 13px; }
+  .m-toggle { font-size: 12px; font-weight: 700; border: 1.5px solid; border-radius: 8px; padding: 6px 10px; }
+
+  .hero { padding: 56px 32px 60px; text-align: center; position: relative; overflow: hidden; }
+  .hero .welcome { font-size: 17px; margin-bottom: 10px; }
+  .hero h1 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.1; margin-bottom: 16px; }
+  .hero .body { font-size: 17px; line-height: 1.6; max-width: 560px; margin: 0 auto 26px; }
+  .hero .btn { display: inline-block; padding: 14px 30px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; }
+
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 30px 32px 40px; }
+  .card { padding: 22px 18px; text-align: center; }
+  .card .ico { width: 48px; height: 48px; margin: 0 auto 12px; display: grid; place-items: center; border-radius: 14px; }
+  .card .ico svg { width: 26px; height: 26px; }
+  .card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .card p { font-size: 12.5px; line-height: 1.4; }
+
+  .specbar { display: flex; flex-wrap: wrap; gap: 26px; padding: 22px 32px; border-top: 1px solid rgba(0,0,0,.06); align-items: flex-start; }
+  .swatches { display: flex; gap: 8px; }
+  .sw { width: 40px; height: 40px; border-radius: 9px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); position: relative; }
+  .sw span { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 9px; color: #64748b; white-space: nowrap; }
+  .specblock { font-size: 12.5px; color: #475569; }
+  .specblock b { color: #1f2937; display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px; }
+
+  @media (max-width: 760px) {
+    .m-links { display: none; }
+    .cards { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ============================================================= */
+  /* DIRECTION 1 — SANCTUARY (elegant editorial, blue + gold + cream) */
+  /* ============================================================= */
+  #d1 { background: #FBF7ED; }
+  #d1 .m-nav { background: #FBF7ED; border-bottom: 1px solid #ece2c9; }
+  #d1 .m-logo svg { background: #fff; box-shadow: 0 0 0 2px #e6d9b4; }
+  #d1 .m-logo .en { font-family: 'Fraunces'; font-weight: 700; font-size: 17px; color: #1E3A8A; }
+  body.ta #d1 .m-logo .en, #d1 .m-logo .ta-name { font-family: 'Noto Serif Tamil'; font-weight: 600; font-size: 15px; color: #1E3A8A; }
+  #d1 .m-logo small { font-size: 11px; color: #9a7b1f; letter-spacing: .5px; }
+  #d1 .m-links a { color: #3b4a66; }
+  #d1 .m-links a:hover { color: #C9A227; }
+  #d1 .m-toggle { border-color: #1E3A8A; color: #1E3A8A; }
+  #d1 .hero { background: radial-gradient(120% 120% at 50% -10%, #fff 0%, #FBF7ED 55%); }
+  #d1 .hero .welcome { font-family: 'Noto Serif Tamil','Fraunces',serif; color: #C9A227; font-style: italic; letter-spacing: .3px; }
+  #d1 .hero h1 { font-family: 'Fraunces'; font-weight: 600; color: #1E3A8A; }
+  body.ta #d1 .hero h1 { font-family: 'Noto Serif Tamil'; font-weight: 600; }
+  #d1 .hero .body { color: #4b5563; }
+  body.ta #d1 .hero .body { font-family: 'Catamaran'; }
+  #d1 .hero .btn { background: #1E3A8A; color: #fff; box-shadow: 0 8px 20px -6px rgba(30,58,138,.5); }
+  #d1 .goldrule { width: 60px; height: 3px; background: linear-gradient(90deg,#C9A227,#e6c766); margin: 0 auto 20px; border-radius: 3px; }
+  #d1 .cards { background: #fff; }
+  #d1 .card { background: #FBF7ED; border: 1px solid # efe4c8; border: 1px solid #efe4c8; border-radius: 16px; }
+  #d1 .card .ico { background: #1E3A8A; color: #fff; }
+  #d1 .card h3 { font-family: 'Fraunces'; color: #1E3A8A; }
+  body.ta #d1 .card h3 { font-family: 'Noto Serif Tamil'; }
+  #d1 .card p { color: #6b7280; }
+  body.ta #d1 .card p, body.ta #d1 .card h3 { font-family: 'Catamaran'; }
+  #d1 .cards { background: #fff; }
+  #d1 .specbar { background:#fff; }
+
+  /* ============================================================= */
+  /* DIRECTION 2 — FAMILY CIRCLE (friendly rounded, bright & warm) */
+  /* ============================================================= */
+  #d2 { background: #FFFDF7; font-family:'Nunito',sans-serif; }
+  #d2 .m-nav { background: #fff; border-bottom: 1px solid #f1e7d0; }
+  #d2 .m-logo svg { background:#EAF1FF; box-shadow: 0 0 0 3px #dbe7ff; }
+  #d2 .m-logo .en { font-family:'Fredoka'; font-weight:600; font-size:18px; color:#2563EB; }
+  body.ta #d2 .m-logo .en { font-family:'Baloo Thambi 2'; font-size:16px; }
+  #d2 .m-logo small { font-size:11px; color:#F59E0B; font-weight:700; }
+  #d2 .m-links { font-family:'Nunito'; font-weight:700; }
+  #d2 .m-links a { color:#475569; }
+  #d2 .m-links a:hover { color:#2563EB; }
+  #d2 .m-toggle { border-color:#F59E0B; color:#B45309; background:#FFF7E6; }
+  #d2 .hero { background: linear-gradient(180deg,#EAF1FF 0%, #FFFDF7 78%); }
+  #d2 .hero .welcome { font-family:'Baloo Thambi 2','Fredoka',cursive; color:#F59E0B; font-weight:600; }
+  #d2 .hero h1 { font-family:'Fredoka'; font-weight:600; color:#1E40AF; }
+  body.ta #d2 .hero h1 { font-family:'Baloo Thambi 2'; }
+  #d2 .hero .body { color:#475569; font-weight:500; }
+  body.ta #d2 .hero .body { font-family:'Mukta Malar'; }
+  #d2 .hero .btn { background:#F59E0B; color:#fff; box-shadow:0 10px 22px -6px rgba(245,158,11,.55); }
+  #d2 .hero .btn:hover { background:#ea8f06; }
+  #d2 .cards { }
+  #d2 .card { background:#fff; border-radius:22px; box-shadow:0 8px 24px -12px rgba(37,99,235,.28); }
+  #d2 .card:nth-child(1) .ico { background:#EAF1FF; color:#2563EB; }
+  #d2 .card:nth-child(2) .ico { background:#FFF2D6; color:#D97706; }
+  #d2 .card:nth-child(3) .ico { background:#E7F7EE; color:#059669; }
+  #d2 .card:nth-child(4) .ico { background:#F3EAFE; color:#7C3AED; }
+  #d2 .card .ico { border-radius:50%; }
+  #d2 .card h3 { font-family:'Fredoka'; color:#1E40AF; }
+  body.ta #d2 .card h3 { font-family:'Baloo Thambi 2'; }
+  #d2 .card p { color:#64748b; }
+  body.ta #d2 .card p { font-family:'Mukta Malar'; }
+  #d2 .specbar { background:#fff; }
+
+  /* ============================================================= */
+  /* DIRECTION 3 — HERITAGE & LIGHT (dignified, gold-forward, luminous) */
+  /* ============================================================= */
+  #d3 { background: #FBF9F3; font-family:'Mulish',sans-serif; }
+  #d3 .m-nav { background:#16275E; }
+  #d3 .m-logo svg { background:#fff; box-shadow:0 0 0 2px #caa63f; }
+  #d3 .m-logo .en { font-family:'Cormorant Garamond'; font-weight:700; font-size:20px; color:#fff; letter-spacing:.3px; }
+  body.ta #d3 .m-logo .en { font-family:'Noto Serif Tamil'; font-size:16px; }
+  #d3 .m-logo small { font-size:10.5px; color:#E7C766; letter-spacing:1.5px; text-transform:uppercase; }
+  #d3 .m-links a { color:#c9d4ef; }
+  #d3 .m-links a:hover { color:#E7C766; }
+  #d3 .m-toggle { border-color:#E7C766; color:#E7C766; }
+  #d3 .hero { background:
+      radial-gradient(80% 90% at 50% -20%, rgba(231,199,102,.18), transparent 60%),
+      linear-gradient(180deg,#16275E 0%, #1d3170 100%); color:#fff; }
+  #d3 .hero .welcome { font-family:'Noto Serif Tamil','Cormorant Garamond',serif; color:#E7C766; letter-spacing:1px; }
+  #d3 .hero h1 { font-family:'Cormorant Garamond'; font-weight:700; color:#fff; }
+  body.ta #d3 .hero h1 { font-family:'Noto Serif Tamil'; font-weight:700; }
+  #d3 .hero .body { color:#cdd7ef; }
+  body.ta #d3 .hero .body { font-family:'Hind Madurai'; }
+  #d3 .hero .btn { background:#E7C766; color:#16275E; box-shadow:0 10px 26px -8px rgba(231,199,102,.6); }
+  #d3 .goldline { width:70px; height:1.5px; background:#E7C766; margin:0 auto 22px; opacity:.8; }
+  #d3 .cards { background:#FBF9F3; }
+  #d3 .card { background:#fff; border:1px solid #eee3c6; border-radius:10px; box-shadow:0 6px 18px -12px rgba(22,39,94,.3); }
+  #d3 .card .ico { background:#FBF6E8; color:#B8860B; border:1px solid #eaddb5; border-radius:10px; }
+  #d3 .card h3 { font-family:'Cormorant Garamond'; font-weight:700; font-size:18px; color:#16275E; }
+  body.ta #d3 .card h3 { font-family:'Noto Serif Tamil'; font-size:15px; }
+  #d3 .card p { color:#6b7280; }
+  body.ta #d3 .card p { font-family:'Hind Madurai'; }
+  #d3 .specbar { background:#fff; }
+
+  /* bilingual text swap */
+  .en-t { display: inline; }
+  .ta-t { display: none; }
+  body.ta .en-t { display: none; }
+  body.ta .ta-t { display: inline; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <span class="brand">BC Tamil Catholic Family — Redesign Preview</span>
+  <div class="spacer"></div>
+  <div class="tabs">
+    <button class="tab active" data-dir="d1">1 · Sanctuary</button>
+    <button class="tab" data-dir="d2">2 · Family Circle</button>
+    <button class="tab" data-dir="d3">3 · Heritage &amp; Light</button>
+  </div>
+  <button class="langbtn" id="lang">தமிழ் / EN</button>
+</div>
+
+<div class="stage">
+
+  <!-- ============ DIRECTION 1 ============ -->
+  <div class="panel active" data-dir="d1">
+    <div class="dirhead">
+      <h2>Direction 1 — “Sanctuary”</h2>
+      <p>Warm editorial elegance. A refined serif (Fraunces / Noto Serif Tamil) over cream, with royal blue and hand-touched gold accents. Timeless and faith-centered without feeling institutional.</p>
+    </div>
+    <div class="frame" id="d1">
+      <div class="m-nav">
+        <div class="m-logo">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#d8a92e"/><circle cx="50" cy="50" r="39" fill="#fdf9f0"/><circle cx="50" cy="50" r="39" fill="none" stroke="#1f4ea8" stroke-width="1.5"/><g fill="none" stroke="#f0c64a" stroke-width="1"><line x1="50" y1="20" x2="50" y2="30"/><line x1="72" y1="28" x2="66" y2="34"/><line x1="80" y1="50" x2="70" y2="50"/><line x1="20" y1="50" x2="30" y2="50"/><line x1="28" y1="28" x2="34" y2="34"/></g><rect x="47" y="38" width="6" height="30" rx="1.5" fill="#d8a92e"/><rect x="40" y="46" width="20" height="6" rx="1.5" fill="#d8a92e"/><circle cx="50" cy="34" r="5" fill="#fff" stroke="#cf9b2a"/><g fill="#1f4ea8"><circle cx="50" cy="72" r="4"/></g><g fill="#e2872f"><circle cx="66" cy="66" r="4"/></g><g fill="#1f4ea8"><circle cx="34" cy="66" r="4"/></g></svg>
+          <div class="nm">
+            <div class="en"><span class="en-t">BC Tamil Catholic Family</span><span class="ta-t">தமிழ் கத்தோலிக்க குடும்பம்</span></div>
+            <small class="en-t">British Columbia, Canada</small><small class="ta-t">பிரிட்டிஷ் கொலம்பியா</small>
+          </div>
+        </div>
+        <nav class="m-links">
+          <a class="en-t" href="#">About</a><a class="ta-t" href="#">எங்களைப் பற்றி</a>
+          <a class="en-t" href="#">Events</a><a class="ta-t" href="#">நிகழ்வுகள்</a>
+          <a class="en-t" href="#">Prayer</a><a class="ta-t" href="#">ஜெபம்</a>
+          <a class="en-t" href="#">Contact</a><a class="ta-t" href="#">தொடர்பு</a>
+        </nav>
+        <span class="m-toggle en-t">தமிழ்</span><span class="m-toggle ta-t">EN</span>
+      </div>
+      <div class="hero">
+        <p class="welcome"><span class="en-t">Welcome, with love</span><span class="ta-t">அன்புடன் வரவேற்கிறோம்</span></p>
+        <h1><span class="en-t">Faith · Family · Fellowship</span><span class="ta-t">விசுவாசம் · குடும்பம் · ஒற்றுமை</span></h1>
+        <div class="goldrule"></div>
+        <p class="body"><span class="en-t">A spiritual home for Tamil Catholic families living across British Columbia — rooted in faith, growing in fellowship.</span><span class="ta-t">பிரிட்டிஷ் கொலம்பியாவில் வாழும் தமிழ் கத்தோலிக்க குடும்பங்களின் ஆன்மீக இல்லம்.</span></p>
+        <a class="btn" href="#"><span class="en-t">Join our Family →</span><span class="ta-t">எங்களுடன் இணையுங்கள் →</span></a>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.8 9.6 2.2 6 5.5 6 7.5 6 8.8 7 12 10c3.2-3 4.5-4 6.5-4 3.3 0 4.7 3.6 3 6.5C19 16.65 12 21 12 21z"/></svg></div>
+          <h3><span class="en-t">Prayer Requests</span><span class="ta-t">ஜெப வேண்டுதல்கள்</span></h3>
+          <p><span class="en-t">Share your intentions</span><span class="ta-t">உங்கள் வேண்டுதலை பகிரவும்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <h3><span class="en-t">Events</span><span class="ta-t">நிகழ்வுகள்</span></h3>
+          <p><span class="en-t">Mass, feasts &amp; gatherings</span><span class="ta-t">திருப்பலி &amp; கூடுகைகள்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
+          <h3><span class="en-t">New Members</span><span class="ta-t">புதிய உறுப்பினர்கள்</span></h3>
+          <p><span class="en-t">Come and belong</span><span class="ta-t">வந்து இணையுங்கள்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></div>
+          <h3><span class="en-t">Socials</span><span class="ta-t">சமூக ஊடகம்</span></h3>
+          <p><span class="en-t">Stay connected</span><span class="ta-t">எங்களுடன் இணைந்திருங்கள்</span></p>
+        </div>
+      </div>
+      <div class="specbar">
+        <div><b>Palette</b><div class="swatches"><div class="sw" style="background:#1E3A8A"><span>Royal Blue</span></div><div class="sw" style="background:#C9A227"><span>Gold</span></div><div class="sw" style="background:#E2872F"><span>Orange</span></div><div class="sw" style="background:#FBF7ED"><span>Cream</span></div><div class="sw" style="background:#1f2937"><span>Ink</span></div></div></div>
+        <div class="specblock" style="margin-left:14px"><b>Type — English</b>Fraunces (headings) · Inter (body)</div>
+        <div class="specblock"><b>Type — Tamil</b>Noto Serif Tamil · Catamaran</div>
+        <div class="specblock"><b>Mood</b>Elegant · Warm · Timeless</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DIRECTION 2 ============ -->
+  <div class="panel" data-dir="d2">
+    <div class="dirhead">
+      <h2>Direction 2 — “Family Circle”</h2>
+      <p>Friendly and welcoming. Rounded Fredoka / Baloo Thambi 2 headings, soft pill cards, and a bright blue + warm orange palette. Reads as inclusive and family-first — great for children’s ministry warmth.</p>
+    </div>
+    <div class="frame" id="d2">
+      <div class="m-nav">
+        <div class="m-logo">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#d8a92e"/><circle cx="50" cy="50" r="39" fill="#fdf9f0"/><circle cx="50" cy="50" r="39" fill="none" stroke="#1f4ea8" stroke-width="1.5"/><g fill="none" stroke="#f0c64a" stroke-width="1"><line x1="50" y1="20" x2="50" y2="30"/><line x1="72" y1="28" x2="66" y2="34"/><line x1="80" y1="50" x2="70" y2="50"/><line x1="20" y1="50" x2="30" y2="50"/><line x1="28" y1="28" x2="34" y2="34"/></g><rect x="47" y="38" width="6" height="30" rx="1.5" fill="#d8a92e"/><rect x="40" y="46" width="20" height="6" rx="1.5" fill="#d8a92e"/><circle cx="50" cy="34" r="5" fill="#fff" stroke="#cf9b2a"/><g fill="#1f4ea8"><circle cx="50" cy="72" r="4"/></g><g fill="#e2872f"><circle cx="66" cy="66" r="4"/></g><g fill="#1f4ea8"><circle cx="34" cy="66" r="4"/></g></svg>
+          <div class="nm">
+            <div class="en"><span class="en-t">BC Tamil Catholic Family</span><span class="ta-t">தமிழ் கத்தோலிக்க குடும்பம்</span></div>
+            <small class="en-t">Welcome home</small><small class="ta-t">வரவேற்கிறோம்</small>
+          </div>
+        </div>
+        <nav class="m-links">
+          <a class="en-t" href="#">About</a><a class="ta-t" href="#">எங்களைப் பற்றி</a>
+          <a class="en-t" href="#">Events</a><a class="ta-t" href="#">நிகழ்வுகள்</a>
+          <a class="en-t" href="#">Prayer</a><a class="ta-t" href="#">ஜெபம்</a>
+          <a class="en-t" href="#">Contact</a><a class="ta-t" href="#">தொடர்பு</a>
+        </nav>
+        <span class="m-toggle en-t">தமிழ்</span><span class="m-toggle ta-t">EN</span>
+      </div>
+      <div class="hero">
+        <p class="welcome"><span class="en-t">You’re always welcome here!</span><span class="ta-t">உங்களை அன்புடன் வரவேற்கிறோம்!</span></p>
+        <h1><span class="en-t">One Family in Faith</span><span class="ta-t">விசுவாசத்தில் ஒரே குடும்பம்</span></h1>
+        <p class="body"><span class="en-t">A warm, welcoming community for Tamil Catholic families across BC. Pray together, celebrate together, belong together.</span><span class="ta-t">பிரிட்டிஷ் கொலம்பியாவில் உள்ள தமிழ் கத்தோலிக்க குடும்பங்களுக்கான அன்பான சமூகம். ஒன்றாக ஜெபிப்போம், ஒன்றாக மகிழ்வோம்.</span></p>
+        <a class="btn" href="#"><span class="en-t">Join our Family →</span><span class="ta-t">எங்களுடன் இணையுங்கள் →</span></a>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.8 9.6 2.2 6 5.5 6 7.5 6 8.8 7 12 10c3.2-3 4.5-4 6.5-4 3.3 0 4.7 3.6 3 6.5C19 16.65 12 21 12 21z"/></svg></div>
+          <h3><span class="en-t">Prayer Requests</span><span class="ta-t">ஜெப வேண்டுதல்கள்</span></h3>
+          <p><span class="en-t">Share your intentions</span><span class="ta-t">உங்கள் வேண்டுதலை பகிரவும்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <h3><span class="en-t">Events</span><span class="ta-t">நிகழ்வுகள்</span></h3>
+          <p><span class="en-t">Mass, feasts &amp; gatherings</span><span class="ta-t">திருப்பலி &amp; கூடுகைகள்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
+          <h3><span class="en-t">New Members</span><span class="ta-t">புதிய உறுப்பினர்கள்</span></h3>
+          <p><span class="en-t">Come and belong</span><span class="ta-t">வந்து இணையுங்கள்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></div>
+          <h3><span class="en-t">Socials</span><span class="ta-t">சமூக ஊடகம்</span></h3>
+          <p><span class="en-t">Stay connected</span><span class="ta-t">எங்களுடன் இணைந்திருங்கள்</span></p>
+        </div>
+      </div>
+      <div class="specbar">
+        <div><b>Palette</b><div class="swatches"><div class="sw" style="background:#2563EB"><span>Blue</span></div><div class="sw" style="background:#F59E0B"><span>Orange</span></div><div class="sw" style="background:#FFE9A8"><span>Soft Yellow</span></div><div class="sw" style="background:#059669"><span>Green</span></div><div class="sw" style="background:#FFFDF7"><span>Cream</span></div></div></div>
+        <div class="specblock" style="margin-left:14px"><b>Type — English</b>Fredoka (headings) · Nunito (body)</div>
+        <div class="specblock"><b>Type — Tamil</b>Baloo Thambi 2 · Mukta Malar</div>
+        <div class="specblock"><b>Mood</b>Friendly · Inclusive · Playful-warm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DIRECTION 3 ============ -->
+  <div class="panel" data-dir="d3">
+    <div class="dirhead">
+      <h2>Direction 3 — “Heritage &amp; Light”</h2>
+      <p>Dignified and sacred. A deep navy header, luminous gold, and an elegant Cormorant / Noto Serif Tamil display over ivory. Communicates reverence and Tamil heritage while staying modern and airy.</p>
+    </div>
+    <div class="frame" id="d3">
+      <div class="m-nav">
+        <div class="m-logo">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#d8a92e"/><circle cx="50" cy="50" r="39" fill="#fdf9f0"/><circle cx="50" cy="50" r="39" fill="none" stroke="#1f4ea8" stroke-width="1.5"/><g fill="none" stroke="#f0c64a" stroke-width="1"><line x1="50" y1="20" x2="50" y2="30"/><line x1="72" y1="28" x2="66" y2="34"/><line x1="80" y1="50" x2="70" y2="50"/><line x1="20" y1="50" x2="30" y2="50"/><line x1="28" y1="28" x2="34" y2="34"/></g><rect x="47" y="38" width="6" height="30" rx="1.5" fill="#d8a92e"/><rect x="40" y="46" width="20" height="6" rx="1.5" fill="#d8a92e"/><circle cx="50" cy="34" r="5" fill="#fff" stroke="#cf9b2a"/><g fill="#1f4ea8"><circle cx="50" cy="72" r="4"/></g><g fill="#e2872f"><circle cx="66" cy="66" r="4"/></g><g fill="#1f4ea8"><circle cx="34" cy="66" r="4"/></g></svg>
+          <div class="nm">
+            <div class="en"><span class="en-t">BC Tamil Catholic Family</span><span class="ta-t">தமிழ் கத்தோலிக்க குடும்பம்</span></div>
+            <small class="en-t">British Columbia</small><small class="ta-t">கனடா</small>
+          </div>
+        </div>
+        <nav class="m-links">
+          <a class="en-t" href="#">About</a><a class="ta-t" href="#">எங்களைப் பற்றி</a>
+          <a class="en-t" href="#">Events</a><a class="ta-t" href="#">நிகழ்வுகள்</a>
+          <a class="en-t" href="#">Prayer</a><a class="ta-t" href="#">ஜெபம்</a>
+          <a class="en-t" href="#">Contact</a><a class="ta-t" href="#">தொடர்பு</a>
+        </nav>
+        <span class="m-toggle en-t">தமிழ்</span><span class="m-toggle ta-t">EN</span>
+      </div>
+      <div class="hero">
+        <p class="welcome"><span class="en-t">In faith and unity</span><span class="ta-t">விசுவாசத்திலும் ஒற்றுமையிலும்</span></p>
+        <h1><span class="en-t">A Light for Every Family</span><span class="ta-t">ஒவ்வொரு குடும்பத்திற்கும் ஒளி</span></h1>
+        <div class="goldline"></div>
+        <p class="body"><span class="en-t">Gathering Tamil Catholic families of British Columbia in prayer, heritage, and service to one another.</span><span class="ta-t">பிரிட்டிஷ் கொலம்பியாவின் தமிழ் கத்தோலிக்க குடும்பங்களை ஜெபத்திலும் பாரம்பரியத்திலும் ஒன்றிணைக்கிறோம்.</span></p>
+        <a class="btn" href="#"><span class="en-t">Join our Family →</span><span class="ta-t">எங்களுடன் இணையுங்கள் →</span></a>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.8 9.6 2.2 6 5.5 6 7.5 6 8.8 7 12 10c3.2-3 4.5-4 6.5-4 3.3 0 4.7 3.6 3 6.5C19 16.65 12 21 12 21z"/></svg></div>
+          <h3><span class="en-t">Prayer Requests</span><span class="ta-t">ஜெப வேண்டுதல்கள்</span></h3>
+          <p><span class="en-t">Share your intentions</span><span class="ta-t">உங்கள் வேண்டுதலை பகிரவும்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <h3><span class="en-t">Events</span><span class="ta-t">நிகழ்வுகள்</span></h3>
+          <p><span class="en-t">Mass, feasts &amp; gatherings</span><span class="ta-t">திருப்பலி &amp; கூடுகைகள்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
+          <h3><span class="en-t">New Members</span><span class="ta-t">புதிய உறுப்பினர்கள்</span></h3>
+          <p><span class="en-t">Come and belong</span><span class="ta-t">வந்து இணையுங்கள்</span></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></div>
+          <h3><span class="en-t">Socials</span><span class="ta-t">சமூக ஊடகம்</span></h3>
+          <p><span class="en-t">Stay connected</span><span class="ta-t">எங்களுடன் இணைந்திருங்கள்</span></p>
+        </div>
+      </div>
+      <div class="specbar">
+        <div><b>Palette</b><div class="swatches"><div class="sw" style="background:#16275E"><span>Navy</span></div><div class="sw" style="background:#B8860B"><span>Deep Gold</span></div><div class="sw" style="background:#E7C766"><span>Light Gold</span></div><div class="sw" style="background:#FBF9F3"><span>Ivory</span></div><div class="sw" style="background:#16275E"><span>&nbsp;</span></div></div></div>
+        <div class="specblock" style="margin-left:14px"><b>Type — English</b>Cormorant Garamond · Mulish</div>
+        <div class="specblock"><b>Type — Tamil</b>Noto Serif Tamil · Hind Madurai</div>
+        <div class="specblock"><b>Mood</b>Dignified · Sacred · Luminous</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    const d = t.dataset.dir;
+    panels.forEach(p => p.classList.toggle('active', p.dataset.dir === d));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }));
+  const langBtn = document.getElementById('lang');
+  langBtn.addEventListener('click', () => {
+    document.body.classList.toggle('ta');
+  });
+</script>
+</body>
+</html>

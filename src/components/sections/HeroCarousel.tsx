@@ -31,7 +31,7 @@ export function HeroCarousel({ images }: { images: string[] }) {
           }`}
         />
       ))}
-      <div className="absolute inset-0 bg-brand-blue/55" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-blueDark/75 via-brand-blue/45 to-brand-blueDark/80" />
       {images.length > 1 && (
         <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center gap-2">
           {images.map((src, i) => (

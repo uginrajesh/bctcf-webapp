@@ -5,5 +5,20 @@
 :root { color-scheme: light; }
 
 body {
-  @apply bg-white text-slate-800 font-sans antialiased;
+  @apply bg-brand-cream text-slate-700 font-sans antialiased;
+}
+
+/* Consistent, visible keyboard focus across the site */
+:focus-visible {
+  outline: 2px solid theme('colors.brand.gold');
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

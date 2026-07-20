@@ -19,13 +19,13 @@ export function MobileNav() {
         {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
       {open && (
-        <nav className="absolute left-0 right-0 top-full z-20 flex flex-col gap-1 border-t bg-white p-4 shadow-lg">
+        <nav className="absolute left-0 right-0 top-full z-20 flex flex-col gap-1 border-t border-brand-goldLine bg-brand-cream p-4 shadow-lg">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.key}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="rounded px-2 py-2 text-slate-700 hover:bg-brand-creamDark"
+              className="rounded-lg px-3 py-2 font-medium text-brand-ink transition-colors hover:bg-brand-creamDark hover:text-brand-blue"
             >
               {t(item.key)}
             </Link>
