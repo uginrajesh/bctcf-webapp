@@ -10,9 +10,12 @@ export function Section({
   return (
     <section className={`px-6 py-11 ${className}`}>
       {label && (
-        <p className="mb-6 text-center font-serif text-xs uppercase tracking-[2px] text-brand-gold">
-          {label}
-        </p>
+        <div className="mb-8 flex flex-col items-center">
+          <p className="font-serif text-xs uppercase tracking-[3px] text-brand-gold">
+            {label}
+          </p>
+          <div className="mt-2 h-[2px] w-10 rounded-full bg-brand-goldSoft" />
+        </div>
       )}
       {children}
     </section>

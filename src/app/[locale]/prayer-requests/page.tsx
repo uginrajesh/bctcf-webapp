@@ -12,9 +12,11 @@ export default async function PrayerPage({ params }: { params: { locale: string 
     <main>
       <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
       <Section>
-        <p className="mx-auto max-w-xl text-center text-slate-600">{t('intro')}</p>
-        <div className="mx-auto mt-4 flex max-w-xl items-center gap-2 rounded-lg border border-dashed border-brand-gold bg-brand-cream p-4 text-sm text-brand-gold">
-          <Lock className="h-4 w-4 shrink-0" aria-hidden />
+        <p className="mx-auto max-w-xl text-center leading-relaxed text-slate-600">{t('intro')}</p>
+        <div className="mx-auto mt-5 flex max-w-xl items-center gap-3 rounded-xl border border-brand-goldLine bg-white p-4 text-sm text-slate-600 shadow-sm">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold">
+            <Lock className="h-4 w-4" aria-hidden />
+          </span>
           <span>{t('confidential')}</span>
         </div>
         <div className="mt-6">

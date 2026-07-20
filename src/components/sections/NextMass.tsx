@@ -51,8 +51,8 @@ export function NextMass({ event }: { event: CalendarEvent }) {
   const locale = useLocale() as 'en' | 'ta'
 
   return (
-    <div className="mx-auto mb-10 max-w-3xl overflow-hidden rounded-xl border border-brand-creamDark bg-white shadow-sm">
-      <div className="bg-brand-blue px-6 py-3 text-center">
+    <div className="mx-auto mb-10 max-w-3xl overflow-hidden rounded-2xl border border-brand-goldLine bg-white shadow-sm">
+      <div className="border-b-2 border-brand-goldSoft/60 bg-brand-blue px-6 py-3 text-center">
         <h2 className="font-serif text-xl text-white">{t('nextMass')}</h2>
       </div>
       <div className="grid md:grid-cols-2">
@@ -74,7 +74,7 @@ export function NextMass({ event }: { event: CalendarEvent }) {
           {event.title && <div className="text-xs text-slate-400">{event.title}</div>}
         </div>
         {event.location && (
-          <div className="min-h-[12rem] overflow-hidden md:border-l md:border-brand-creamDark">
+          <div className="min-h-[12rem] overflow-hidden md:border-l md:border-brand-goldLine">
             <iframe
               src={`https://www.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`}
               title={`${t('nextMass')} - ${event.location}`}
@@ -85,10 +85,10 @@ export function NextMass({ event }: { event: CalendarEvent }) {
           </div>
         )}
       </div>
-      <div className="flex flex-wrap justify-center gap-3 border-t border-brand-creamDark px-6 py-5">
+      <div className="flex flex-wrap justify-center gap-3 border-t border-brand-goldLine px-6 py-5">
         <Link
           href="/prayer-requests"
-          className="rounded-full bg-brand-orange px-6 py-2.5 text-sm font-bold text-white shadow-sm transition hover:brightness-105"
+          className="rounded-full bg-brand-blue px-6 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-blue/25 transition hover:bg-brand-blueDark"
         >
           {t('registerForMass')}
         </Link>

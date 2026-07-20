@@ -11,14 +11,19 @@ export default async function NewMembersPage({ params }: { params: { locale: str
     <main>
       <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
       <Section>
-        <p className="mx-auto mb-6 max-w-lg text-center text-sm text-slate-600">{t('intro')}</p>
+        <p className="mx-auto mb-6 max-w-lg text-center leading-relaxed text-slate-600">{t('intro')}</p>
         <FormEmbed src={SITE.newMemberFormUrl} title={t('title')} />
-        <div className="mx-auto mt-8 max-w-md rounded-lg bg-brand-creamDark p-4">
-          <h4 className="mb-2 font-serif text-brand-blue">{t('nextTitle')}</h4>
-          <ol className="list-decimal pl-5 text-sm leading-7 text-slate-600">
-            <li>{t('next1')}</li>
-            <li>{t('next2')}</li>
-            <li>{t('next3')}</li>
+        <div className="mx-auto mt-8 max-w-md rounded-2xl border border-brand-goldLine bg-white p-6 shadow-sm">
+          <h4 className="mb-4 font-serif text-lg font-semibold text-brand-blue">{t('nextTitle')}</h4>
+          <ol className="space-y-3">
+            {[t('next1'), t('next2'), t('next3')].map((step, i) => (
+              <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue text-xs font-bold text-white">
+                  {i + 1}
+                </span>
+                <span className="pt-0.5">{step}</span>
+              </li>
+            ))}
           </ol>
         </div>
       </Section>

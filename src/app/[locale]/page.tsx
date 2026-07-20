@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { Hero } from '@/components/sections/Hero'
 import { Section } from '@/components/ui/Section'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import { MissionCards } from '@/components/sections/MissionCards'
 import { NextMass } from '@/components/sections/NextMass'
 import { UpcomingEvent } from '@/components/sections/UpcomingEvent'
@@ -20,7 +21,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
     <main>
       <Hero images={heroImages} />
       <Section className="bg-brand-cream text-center">
-        <h2 className="mb-3 font-serif text-2xl text-brand-blue">{t('welcomeTitle')}</h2>
+        <SectionHeading align="center" className="mb-4">{t('welcomeTitle')}</SectionHeading>
         <p className="mx-auto max-w-2xl leading-relaxed text-slate-600">{t('welcomeBody')}</p>
       </Section>
       <MissionCards />

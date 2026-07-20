@@ -10,7 +10,7 @@ export function UpcomingEvent({ event }: { event: CalendarEvent | null }) {
   const d = formatEventDate(event.start, locale)
   return (
     <Section label={t('homeDontMiss')}>
-      <div className="mx-auto flex max-w-3xl items-center gap-6 rounded-2xl bg-brand-blue p-7 text-white">
+      <div className="mx-auto flex max-w-3xl items-center gap-6 rounded-2xl bg-brand-blue p-7 text-white shadow-lg shadow-brand-blue/20 ring-1 ring-brand-goldSoft/30">
         <div className="min-w-20 rounded-xl bg-brand-orange px-5 py-4 text-center">
           <div className="text-3xl font-extrabold leading-none">{d.day}</div>
           <div className="text-sm uppercase tracking-wide">{d.month}</div>

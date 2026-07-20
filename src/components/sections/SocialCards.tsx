@@ -13,7 +13,7 @@ export function SocialCards() {
     <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2 md:grid-cols-4">
       {CARDS.map((c) => (
         <a key={c.key} href={c.href} target="_blank" rel="noopener noreferrer"
-          className={`${c.cls} rounded-xl px-3 py-7 text-center font-bold text-white transition hover:brightness-105`}>
+          className={`${c.cls} rounded-2xl px-3 py-8 text-center font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}>
           <c.Icon className="mx-auto mb-2 h-9 w-9" aria-hidden />
           {c.label}
         </a>

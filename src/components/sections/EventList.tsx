@@ -31,13 +31,17 @@ export function EventList({ events }: { events: CalendarEvent[] }) {
       {events.map((e) => {
         const d = formatEventDate(e.start, locale)
         return (
-          <div key={e.id} className="mb-3 flex gap-4 rounded-lg border border-brand-creamDark border-l-4 border-l-brand-orange bg-white p-4">
+          <div key={e.id} className="mb-3 flex gap-4 rounded-xl border border-brand-goldLine bg-white p-4 shadow-sm transition hover:shadow-md">
             <div className="min-w-16 rounded-lg bg-brand-blue px-4 py-2 text-center text-white">
               <div className="text-2xl font-extrabold leading-none">{d.day}</div>
               <div className="text-xs uppercase tracking-wide">{d.month}</div>
             </div>
             <div>
-              {e.isMass && <div className="text-[10px] uppercase tracking-wide text-brand-gold">Holy Mass</div>}
+              {e.isMass && (
+                <span className="mb-1 inline-block rounded-full bg-brand-gold/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-gold">
+                  Holy Mass
+                </span>
+              )}
               <h3 className="font-serif text-brand-blue">{e.title}</h3>
               <p className="text-xs text-slate-500">
                 {[d.time, e.location].filter(Boolean).join(' · ')}

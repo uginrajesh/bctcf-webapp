@@ -39,9 +39,9 @@ export function PriestsGrid({ priests }: { priests: Priest[] }) {
         {priests.map((p) => (
           <div
             key={p.id}
-            className="rounded-lg border-b-[3px] border-brand-gold bg-white p-5 text-center shadow-sm"
+            className="rounded-2xl border border-brand-goldLine bg-white p-5 text-center shadow-sm transition hover:shadow-md"
           >
-            <div className="relative mx-auto mb-3 h-32 w-32 overflow-hidden rounded-full bg-brand-creamDark">
+            <div className="relative mx-auto mb-3 h-32 w-32 overflow-hidden rounded-full bg-brand-creamDark ring-2 ring-brand-goldSoft/50">
               <Image src={p.photo} alt={p.name[locale]} fill sizes="128px" className="object-cover" />
             </div>
             <h3 className="font-serif text-lg font-semibold text-brand-blue">{p.name[locale]}</h3>
@@ -93,7 +93,7 @@ export function PriestsGrid({ priests }: { priests: Priest[] }) {
             <button
               type="button"
               onClick={() => setOpenId(null)}
-              className="mt-6 rounded-full bg-brand-orange px-6 py-2 font-bold text-white"
+              className="mt-6 rounded-full bg-brand-blue px-6 py-2 font-semibold text-white transition hover:bg-brand-blueDark"
             >
               {t('close')}
             </button>

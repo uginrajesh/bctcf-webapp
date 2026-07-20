@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { Section } from '@/components/ui/Section'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import data from '@/data/announcements.json'
 
 // Renders text with **bold** segments. Wrap any part of an announcement body
@@ -22,18 +23,16 @@ export function Announcements() {
   const locale = useLocale() as 'en' | 'ta'
   return (
     <Section className="bg-brand-creamDark">
-      <h2 className="mb-6 text-center font-serif text-2xl text-brand-blue">
-        {t('announcements')}
-      </h2>
+      <SectionHeading align="center" className="mb-8">{t('announcements')}</SectionHeading>
       <div className="mx-auto max-w-2xl">
         {data.items.map((item, i) => (
           <div
             key={i}
-            className="mb-3 rounded-lg border-l-4 border-brand-orange bg-white p-4"
+            className="mb-3 rounded-xl border border-brand-goldLine border-l-4 border-l-brand-gold bg-white p-5 shadow-sm"
           >
-            <p className="text-xs uppercase tracking-wide text-brand-gold">{item.date}</p>
-            <h4 className="my-1 font-serif text-brand-blue">{item.title[locale]}</h4>
-            <p className="text-sm text-slate-500">{renderRichText(item.body[locale])}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand-gold">{item.date}</p>
+            <h4 className="my-1 font-serif text-lg text-brand-blue">{item.title[locale]}</h4>
+            <p className="text-sm leading-relaxed text-slate-500">{renderRichText(item.body[locale])}</p>
           </div>
         ))}
       </div>
