@@ -11,7 +11,7 @@ export type Priest = {
   name: Localized
   role?: Localized
   brief: Localized
-  full: Localized
+  full?: Localized
 }
 
 export function PriestsGrid({ priests }: { priests: Priest[] }) {
@@ -49,18 +49,20 @@ export function PriestsGrid({ priests }: { priests: Priest[] }) {
               <p className="text-xs uppercase tracking-wide text-brand-gold">{p.role[locale]}</p>
             )}
             <p className="mt-2 text-sm text-slate-600">{p.brief[locale]}</p>
-            <button
-              type="button"
-              onClick={() => setOpenId(p.id)}
-              className="mt-3 text-sm font-semibold text-brand-blue underline hover:text-brand-gold"
-            >
-              {t('knowMore')} →
-            </button>
+            {p.full && (
+              <button
+                type="button"
+                onClick={() => setOpenId(p.id)}
+                className="mt-3 text-sm font-semibold text-brand-blue underline hover:text-brand-gold"
+              >
+                {t('knowMore')} →
+              </button>
+            )}
           </div>
         ))}
       </div>
 
-      {open && (
+      {open?.full && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
           onClick={() => setOpenId(null)}
