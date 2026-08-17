@@ -1,17 +1,39 @@
 {
   "priests": [
     {
-      "id": "example",
-      "photo": "/priests/placeholder.svg",
-      "name": { "en": "Rev. Fr. [Full Name]", "ta": "அருள்பணி [முழுப் பெயர்]" },
-      "role": { "en": "Spiritual Director", "ta": "ஆன்மீக இயக்குநர்" },
+      "id": "frjohnlouis",
+      "photo": "/priests/FatherJohnLouis.jpg",
+      "name": { "en": "Rev. Fr. John Loius Mariapragasam SDB", "ta": "அருட்தந்தை ஜான் லூயிஸ் மரியபிரகாசம் ச.ச." },
       "brief": {
-        "en": "A devoted shepherd who celebrates the Tamil Holy Mass with our community and walks with our families through every season of life - baptisms, first communions, weddings, and times of need.",
-        "ta": "எங்கள் சமூகத்துடன் தமிழ் திருப்பலியை நிறைவேற்றி, வாழ்வின் ஒவ்வொரு பருவத்திலும் - திருமுழுக்கு, முதல் நற்கருணை, திருமணம், தேவையான நேரங்களிலும் - எங்கள் குடும்பங்களுடன் இணைந்து பயணிக்கும் அர்ப்பணிப்புள்ள மேய்ப்பர்."
-      },
-      "full": {
-        "en": "Ordained to serve the people of God, Father brings a deep love for the Tamil Catholic tradition and a pastor's heart for community. He celebrates Mass and the sacraments in Tamil, accompanies families who are new to Canada, and encourages our children to grow strong in both their faith and their mother tongue.\n\nWhether at the altar, during a home visit, or over a cup of tea after Mass, he is a steady and prayerful presence - a reminder that, wherever we have come from, we are one family in Christ.",
-        "ta": "இறைமக்களுக்குப் பணியாற்ற திருநிலைப்படுத்தப்பட்ட அருட்தந்தை, தமிழ் கத்தோலிக்க பாரம்பரியத்தின் மீது ஆழ்ந்த அன்பையும், சமூகத்தின் மீது ஒரு மேய்ப்பரின் இதயத்தையும் கொண்டுள்ளார். அவர் தமிழில் திருப்பலியையும் திருவருட்சாதனங்களையும் நிறைவேற்றுகிறார், கனடாவுக்குப் புதிதாக வரும் குடும்பங்களுடன் இணைந்து செல்கிறார், மேலும் நம் பிள்ளைகள் தங்கள் விசுவாசத்திலும் தாய்மொழியிலும் வலிமையாக வளர ஊக்குவிக்கிறார்.\n\nபீடத்தில், வீட்டுச் சந்திப்பில், அல்லது திருப்பலிக்குப் பின் ஒரு கோப்பை தேநீருடன் - நாம் எங்கிருந்து வந்தாலும் கிறிஸ்துவில் ஒரே குடும்பம் என்பதை நினைவூட்டும் ஓர் உறுதியான, செபம் நிறைந்த இருப்பாக அவர் இருக்கிறார்."
+        "en": "Rector - Our Lady of Good Counsel Elementary School, Surrey",
+        "ta": "தலைவர் (ரெக்டர்) - நல்லாலோசனை அன்னை தொடக்கப்பள்ளி, சர்ரி"
+      }
+    },
+    {
+      "id": "frjohnbaptist",
+      "photo": "/priests/FatherJohnBaptist.jpg",
+      "name": { "en": "Rev. Fr. John Baptist Barnabas SDB", "ta": "அருட்தந்தை ஜான் பாப்டிஸ்ட் பர்னபாஸ்" },
+      "brief": {
+        "en": "Parish Priest - Our Lady of Good Counsel Parish, Surrey",
+        "ta": "பங்குத் தந்தை - நல்லாலோசனை அன்னை பங்கு, சர்ரி"
+      }
+    },
+    {
+      "id": "frtap",
+      "photo": "/priests/FatherTapKurudeepan.jpeg",
+      "name": { "en": "Rev. Fr. Thomas (Tap) Kurudeepan OMI", "ta": "அருட்தந்தை ோமஸ் (டாப்) குருதீபன், OMI" },
+      "brief": {
+        "en": "Parish Priest - St. Paul’s Catholic Parish, North Vancouver",
+        "ta": "பங்குத் தந்தை - புனித சின்னப்பர் கத்தோலிக்க பங்கு, வட வான்கூவர்"
+      }
+    },
+    {
+      "id": "frEslin",
+      "photo": "/priests/FatherEslin.png",
+      "name": { "en": "Rev. Fr. Eslin Pereira CMF", "ta": "அருட்தந்தை எஸ்லின் பெரேரா, CMF" },
+      "brief": {
+        "en": "Chaplain - Vancouver Archdiocese Cursillo movement",
+        "ta": "ஆன்மிக அருட்பணியாளர் - குர்சில்லோ இயக்கம் வான்கூவர் பேராயம்"
       }
     }
   ]
