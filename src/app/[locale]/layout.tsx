@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
-import { getMessages, setRequestLocale } from 'next-intl/server'
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Inter, Fraunces, Noto_Serif_Tamil, Catamaran } from 'next/font/google'
 import { routing } from '@/i18n/routing'
+import { SITE } from '@/config/site'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import '../globals.css'
@@ -31,10 +32,36 @@ const catamaran = Catamaran({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: 'BC Tamil Catholic Family',
-  description:
-    'A warm spiritual home for Tamil Catholic families across British Columbia.',
+// Metadata is per-locale so a link shared in Tamil previews in Tamil. Paths are
+// relative -- Next resolves them against metadataBase.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale })
+  const title = t('common.communityName')
+  const description = t('home.heroBody')
+  const languages: Record<string, string> = Object.fromEntries(
+    routing.locales.map((l) => [l, `/${l}`]),
+  )
+  languages['x-default'] = `/${routing.defaultLocale}`
+
+  return {
+    metadataBase: new URL(SITE.url),
+    title,
+    description,
+    alternates: { canonical: `/${locale}`, languages },
+    openGraph: {
+      type: 'website',
+      siteName: title,
+      title,
+      description,
+      url: `/${locale}`,
+      locale: locale === 'ta' ? 'ta_IN' : 'en_CA',
+    },
+  }
 }
 
 export function generateStaticParams() {

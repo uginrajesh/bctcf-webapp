@@ -13,6 +13,10 @@ export const NAV_ITEMS: { key: NavKey; href: string }[] = [
 ]
 
 export const SITE = {
+  // Canonical origin. Used for metadataBase, canonical/hreflang links, the
+  // sitemap and robots.txt -- so social previews and search results point at
+  // the real domain rather than the deploy-specific vercel.app URL.
+  url: 'https://bctamilcatholicfamily.ca',
   email: 'bctamilcatholicfamily@gmail.com',
   socials: {
     // TODO(content): replace with real URLs before launch (Open Item #3)
