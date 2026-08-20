@@ -1,6 +1,7 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import type { CalendarEvent } from '@/lib/google-calendar'
+import { streetAddress } from '@/lib/venues'
 import { EVENT_TZ } from './EventList'
 
 function formatFull(iso: string, locale: 'en' | 'ta') {
@@ -52,7 +53,10 @@ function googleCalendarUrl(event: CalendarEvent, locale: 'en' | 'ta') {
 export function NextMass({ event }: { event: CalendarEvent }) {
   const t = useTranslations('events')
   const locale = useLocale() as 'en' | 'ta'
-  const location = event.location[locale]
+  // With the venue name shown above, the address only needs its street part.
+  const location = event.venue
+    ? streetAddress(event.location[locale])
+    : event.location[locale]
   const mapQuery = event.location.en || event.location.ta
 
   return (
