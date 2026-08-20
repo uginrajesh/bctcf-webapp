@@ -6,7 +6,7 @@ import { MissionCards } from '@/components/sections/MissionCards'
 import { NextMass } from '@/components/sections/NextMass'
 import { UpcomingEvent } from '@/components/sections/UpcomingEvent'
 import { QuickAccess } from '@/components/sections/QuickAccess'
-import { Announcements } from '@/components/sections/Announcements'
+import { HomeEvents } from '@/components/sections/HomeEvents'
 import { getUpcomingEvents } from '@/lib/google-calendar'
 import { getHeroImages } from '@/lib/hero-images'
 
@@ -16,6 +16,10 @@ export default async function Home({ params }: { params: { locale: string } }) {
   const events = await getUpcomingEvents(10)
   const nextMass = events.find((e) => e.isMass) ?? null
   const nextOther = events.find((e) => e.id !== nextMass?.id) ?? null
+  // Both of the above are rendered on their own below; drop them from the list
+  // section so the same event never appears twice on one page.
+  const featured = new Set([nextMass?.id, nextOther?.id].filter(Boolean))
+  const moreEvents = events.filter((e) => !featured.has(e.id)).slice(0, 3)
   const heroImages = getHeroImages()
   return (
     <main>
@@ -32,7 +36,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
       )}
       <UpcomingEvent event={nextOther} />
       <QuickAccess />
-      <Announcements />
+      <HomeEvents events={moreEvents} />
     </main>
   )
 }

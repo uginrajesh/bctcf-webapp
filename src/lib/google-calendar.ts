@@ -1,8 +1,10 @@
+export type Localized = { en: string; ta: string }
+
 export type CalendarEvent = {
   id: string
-  title: string
-  description: string
-  location: string
+  title: Localized
+  description: Localized
+  location: Localized
   start: string
   end: string
   isMass: boolean
@@ -17,16 +19,36 @@ type GoogleEventItem = {
   end?: { dateTime?: string; date?: string }
 }
 
+// Calendar entries carry both languages in a single field, split by a `--ta--`
+// marker: everything before it is English, everything after is Tamil. Titles
+// keep it inline ("Tamil Mass --ta-- Tamil text") since Google Calendar
+// summaries cannot hold newlines; descriptions usually put it on its own line.
+// Entries without the marker reuse the same text for both locales, so an
+// untranslated event still renders instead of going blank on /ta.
+const TA_MARKER = /--\s*ta\s*--/i
+
+export function splitBilingual(text: string): Localized {
+  const trimmed = text.trim()
+  if (!trimmed) return { en: '', ta: '' }
+  const m = TA_MARKER.exec(trimmed)
+  if (!m) return { en: trimmed, ta: trimmed }
+  const en = trimmed.slice(0, m.index).trim()
+  const ta = trimmed.slice(m.index + m[0].length).trim()
+  // A marker with nothing on one side falls back rather than rendering blank.
+  return { en: en || ta, ta: ta || en }
+}
+
 export function mapItem(item: GoogleEventItem): CalendarEvent {
-  const title = item.summary ?? ''
+  const summary = item.summary ?? ''
   return {
     id: item.id,
-    title,
-    description: item.description ?? '',
-    location: item.location ?? '',
+    title: splitBilingual(summary),
+    description: splitBilingual(item.description ?? ''),
+    location: splitBilingual(item.location ?? ''),
     start: item.start?.dateTime ?? item.start?.date ?? '',
     end: item.end?.dateTime ?? item.end?.date ?? '',
-    isMass: /holy mass/i.test(title),
+    // Match the raw summary so the flag works whichever half names the Mass.
+    isMass: /holy mass/i.test(summary),
   }
 }
 

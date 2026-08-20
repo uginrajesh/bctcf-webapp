@@ -37,7 +37,8 @@
     "setReminder": "Set Reminder",
     "empty": "No upcoming events - check back later.",
     "homeDontMiss": "Don't Miss",
-    "homeUpcoming": "Upcoming Event"
+    "homeUpcoming": "Upcoming Event",
+    "viewAll": "View all events"
   },
   "home": {
     "heroWelcomeTa": "அன்புடன் வரவேற்கிறோம்",

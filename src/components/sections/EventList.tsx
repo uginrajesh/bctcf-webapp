@@ -42,11 +42,11 @@ export function EventList({ events }: { events: CalendarEvent[] }) {
                   Holy Mass
                 </span>
               )}
-              <h3 className="font-serif text-brand-blue">{e.title}</h3>
+              <h3 className="font-serif text-brand-blue">{e.title[locale]}</h3>
               <p className="text-xs text-slate-500">
-                {[d.time, e.location].filter(Boolean).join(' · ')}
+                {[d.time, e.location[locale]].filter(Boolean).join(' · ')}
               </p>
-              {e.description && <p className="mt-1 text-xs text-slate-500">{e.description}</p>}
+              {e.description[locale] && <p className="mt-1 text-xs text-slate-500">{e.description[locale]}</p>}
             </div>
           </div>
         )

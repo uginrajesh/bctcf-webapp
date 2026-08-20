@@ -28,7 +28,7 @@ function gcalDate(iso: string) {
   return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')
 }
 
-function googleCalendarUrl(event: CalendarEvent) {
+function googleCalendarUrl(event: CalendarEvent, locale: 'en' | 'ta') {
   const start = gcalDate(event.start)
   let end = gcalDate(event.end)
   if (!end) {
@@ -38,17 +38,22 @@ function googleCalendarUrl(event: CalendarEvent) {
   }
   const params = new URLSearchParams({
     action: 'TEMPLATE',
-    text: event.title || 'Holy Mass',
+    text: event.title[locale] || 'Holy Mass',
     dates: `${start}/${end}`,
   })
-  if (event.location) params.set('location', event.location)
-  if (event.description) params.set('details', event.description)
+  // Google Maps and Calendar geocode the English address far more reliably
+  // than a translated parish name, so send that and keep Tamil for display.
+  const address = event.location.en || event.location.ta
+  if (address) params.set('location', address)
+  if (event.description[locale]) params.set('details', event.description[locale])
   return `https://calendar.google.com/calendar/render?${params.toString()}`
 }
 
 export function NextMass({ event }: { event: CalendarEvent }) {
   const t = useTranslations('events')
   const locale = useLocale() as 'en' | 'ta'
+  const location = event.location[locale]
+  const mapQuery = event.location.en || event.location.ta
 
   return (
     <div className="mx-auto mb-10 max-w-3xl overflow-hidden rounded-2xl border border-brand-goldLine bg-white shadow-sm">
@@ -63,21 +68,23 @@ export function NextMass({ event }: { event: CalendarEvent }) {
             </div>
             <div className="font-semibold text-brand-blue">{formatFull(event.start, locale)}</div>
           </div>
-          {event.location && (
+          {location && (
             <div>
               <div className="text-[11px] uppercase tracking-wide text-brand-gold">
                 {t('locationLabel')}
               </div>
-              <div>{event.location}</div>
+              <div>{location}</div>
             </div>
           )}
-          {event.title && <div className="text-xs text-slate-400">{event.title}</div>}
+          {event.title[locale] && (
+            <div className="text-xs text-slate-400">{event.title[locale]}</div>
+          )}
         </div>
-        {event.location && (
+        {mapQuery && (
           <div className="min-h-[12rem] overflow-hidden md:border-l md:border-brand-goldLine">
             <iframe
-              src={`https://www.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`}
-              title={`${t('nextMass')} - ${event.location}`}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`}
+              title={`${t('nextMass')} - ${location}`}
               className="h-full min-h-[12rem] w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -93,7 +100,7 @@ export function NextMass({ event }: { event: CalendarEvent }) {
           {t('registerForMass')}
         </Link>
         <a
-          href={googleCalendarUrl(event)}
+          href={googleCalendarUrl(event, locale)}
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-full border-2 border-brand-blue px-6 py-2.5 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"

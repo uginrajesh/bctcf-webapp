@@ -14,8 +14,28 @@ describe('EventList', () => {
     expect(screen.getByText(/Events coming soon/)).toBeInTheDocument()
   })
 
+  const event = {
+    id: '1',
+    title: { en: 'Tamil Holy Mass', ta: 'தமிழ் திருப்பலி' },
+    description: { en: '', ta: '' },
+    location: { en: 'Vancouver', ta: 'வான்கூவர்' },
+    start: '2026-07-12T10:30:00-07:00',
+    end: '2026-07-12T11:30:00-07:00',
+    isMass: true,
+  }
+
   it('renders an event title when present', () => {
-    wrap(<EventList events={[{ id: '1', title: 'Tamil Holy Mass', description: '', location: 'Vancouver', start: '2026-07-12T10:30:00-07:00', isMass: true }]} />)
+    wrap(<EventList events={[event]} />)
     expect(screen.getByText('Tamil Holy Mass')).toBeInTheDocument()
+  })
+
+  it('renders the Tamil title and location on the ta locale', () => {
+    render(
+      <NextIntlClientProvider locale="ta" messages={messages}>
+        <EventList events={[event]} />
+      </NextIntlClientProvider>,
+    )
+    expect(screen.getByText('தமிழ் திருப்பலி')).toBeInTheDocument()
+    expect(screen.getByText(/வான்கூவர்/)).toBeInTheDocument()
   })
 })
