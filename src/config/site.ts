@@ -18,12 +18,15 @@ export const SITE = {
   // the real domain rather than the deploy-specific vercel.app URL.
   url: 'https://bctamilcatholicfamily.ca',
   email: 'bctamilcatholicfamily@gmail.com',
+  // Not published yet -- see isPublishedUrl below for what counts as a real
+  // link. Until one is set, the card renders disabled with a "Coming Soon"
+  // badge. Paste our own page or invite URL here and that card goes live;
+  // nothing else needs to change.
   socials: {
-    // TODO(content): replace with real URLs before launch (Open Item #3)
-    facebook: 'https://facebook.com/',
-    instagram: 'https://instagram.com/',
-    youtube: 'https://youtube.com/',
-    whatsapp: 'https://chat.whatsapp.com/',
+    facebook: '',
+    instagram: '',
+    youtube: '',
+    whatsapp: '',
   },
   // Apps Script Web App URL that saves newsletter subscriber emails to a Google
   // Sheet (see apps-script/newsletter-subscribe.gs). Empty = signup disabled.
@@ -36,3 +39,16 @@ export const SITE = {
   newMemberFormUrl:
     'https://docs.google.com/forms/d/e/1FAIpQLSfLdKiIgEPs1bylp3si-e8mSBzL8U4LiRqNo67ONEmixDlbvw/viewform',
 } as const
+
+// A social link only counts as published when it points at *our* page, not at
+// the platform's front door: "https://facebook.com/" is a perfectly valid URL
+// that reaches nobody, so it stays a placeholder. The distinguishing signal is
+// a non-empty path -- a profile handle, channel, or invite code.
+export function isPublishedUrl(url: string): boolean {
+  if (!url.trim()) return false
+  try {
+    return new URL(url).pathname.replace(/\/+$/, '') !== ''
+  } catch {
+    return false
+  }
+}
