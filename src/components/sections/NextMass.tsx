@@ -73,6 +73,9 @@ export function NextMass({ event }: { event: CalendarEvent }) {
               <div className="text-[11px] uppercase tracking-wide text-brand-gold">
                 {t('locationLabel')}
               </div>
+              {event.venue && (
+                <div className="font-semibold text-brand-blue">{event.venue[locale]}</div>
+              )}
               <div>{location}</div>
             </div>
           )}

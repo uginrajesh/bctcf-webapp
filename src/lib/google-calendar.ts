@@ -1,3 +1,5 @@
+import { findVenue } from './venues'
+
 export type Localized = { en: string; ta: string }
 
 export type CalendarEvent = {
@@ -5,6 +7,8 @@ export type CalendarEvent = {
   title: Localized
   description: Localized
   location: Localized
+  // Tamil display name for a known parish, resolved from the address.
+  venue: Localized | null
   start: string
   end: string
   isMass: boolean
@@ -40,11 +44,14 @@ export function splitBilingual(text: string): Localized {
 
 export function mapItem(item: GoogleEventItem): CalendarEvent {
   const summary = item.summary ?? ''
+  const location = splitBilingual(item.location ?? '')
   return {
     id: item.id,
     title: splitBilingual(summary),
     description: splitBilingual(item.description ?? ''),
-    location: splitBilingual(item.location ?? ''),
+    location,
+    // An explicit `--ta--` in the calendar wins; the lookup only fills the gap.
+    venue: location.en === location.ta ? findVenue(location.en) : null,
     start: item.start?.dateTime ?? item.start?.date ?? '',
     end: item.end?.dateTime ?? item.end?.date ?? '',
     // Match the raw summary so the flag works whichever half names the Mass.

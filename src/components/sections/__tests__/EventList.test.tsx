@@ -18,7 +18,8 @@ describe('EventList', () => {
     id: '1',
     title: { en: 'Tamil Holy Mass', ta: 'தமிழ் திருப்பலி' },
     description: { en: '', ta: '' },
-    location: { en: 'Vancouver', ta: 'வான்கூவர்' },
+    location: { en: 'Vancouver', ta: 'Vancouver' },
+    venue: { en: 'Good Counsel Parish', ta: 'நல்லாலோசனை அன்னை பங்கு, சர்ரி' },
     start: '2026-07-12T10:30:00-07:00',
     end: '2026-07-12T11:30:00-07:00',
     isMass: true,
@@ -36,6 +37,6 @@ describe('EventList', () => {
       </NextIntlClientProvider>,
     )
     expect(screen.getByText('தமிழ் திருப்பலி')).toBeInTheDocument()
-    expect(screen.getByText(/வான்கூவர்/)).toBeInTheDocument()
+    expect(screen.getByText(/நல்லாலோசனை அன்னை பங்கு/)).toBeInTheDocument()
   })
 })

@@ -65,11 +65,35 @@ describe('mapItem', () => {
     expect(e.isMass).toBe(true)
   })
 
+  it('resolves a Tamil venue name from a known geocoded address', () => {
+    const e = mapItem({
+      id: '5',
+      summary: 'Holy Mass',
+      location: 'Our Lady of Good Counsel Parish, 5900 128 St, Surrey, BC, Canada',
+      start: { dateTime: '2026-09-12T16:00:00-07:00' },
+    })
+    expect(e.venue?.ta).toBe('நல்லாலோசனை அன்னை பங்கு, சர்ரி')
+    // The geocoded address is left untouched so Maps can still find it.
+    expect(e.location.en).toBe('Our Lady of Good Counsel Parish, 5900 128 St, Surrey, BC, Canada')
+  })
+
+  it('lets an explicit --ta-- location override the venue lookup', () => {
+    const e = mapItem({
+      id: '6',
+      summary: 'Holy Mass',
+      location: 'Our Lady of Good Counsel Parish, Surrey --ta-- வேறு இடம்',
+      start: { date: '2026-09-12' },
+    })
+    expect(e.venue).toBeNull()
+    expect(e.location.ta).toBe('வேறு இடம்')
+  })
+
   it('does not flag non-mass events, and handles all-day + missing fields', () => {
     const e = mapItem({ id: '2', summary: 'Family Picnic', start: { date: '2026-07-26' } })
     expect(e.isMass).toBe(false)
     expect(e.description).toEqual({ en: '', ta: '' })
     expect(e.location).toEqual({ en: '', ta: '' })
+    expect(e.venue).toBeNull()
     expect(e.start).toBe('2026-07-26')
   })
 })

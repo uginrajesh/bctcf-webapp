@@ -18,7 +18,7 @@ export function UpcomingEvent({ event }: { event: CalendarEvent | null }) {
         <div>
           <p className="text-xs uppercase tracking-wide text-brand-yellow">{t('homeUpcoming')}</p>
           <h3 className="my-1 text-xl font-bold">{event.title[locale]}</h3>
-          <p className="text-sm opacity-85">{[d.time, event.location[locale]].filter(Boolean).join(' · ')}</p>
+          <p className="text-sm opacity-85">{[d.time, (event.venue ?? event.location)[locale]].filter(Boolean).join(' · ')}</p>
         </div>
       </div>
     </Section>

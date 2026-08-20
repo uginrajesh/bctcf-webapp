@@ -44,7 +44,7 @@ export function EventList({ events }: { events: CalendarEvent[] }) {
               )}
               <h3 className="font-serif text-brand-blue">{e.title[locale]}</h3>
               <p className="text-xs text-slate-500">
-                {[d.time, e.location[locale]].filter(Boolean).join(' · ')}
+                {[d.time, (e.venue ?? e.location)[locale]].filter(Boolean).join(' · ')}
               </p>
               {e.description[locale] && <p className="mt-1 text-xs text-slate-500">{e.description[locale]}</p>}
             </div>
