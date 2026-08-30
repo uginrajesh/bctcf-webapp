@@ -1,5 +1,12 @@
 import { findVenue } from './venues'
 
+// Cache tag for everything fetched from the calendar. `revalidateTag` on this
+// makes a calendar edit visible immediately -- see /api/revalidate. Without it
+// an edit waits out the revalidate window below, because Vercel's data cache
+// survives deployments and is not refreshed at build time, so redeploying does
+// not pick up new events either.
+export const CALENDAR_TAG = 'calendar'
+
 export type Localized = { en: string; ta: string }
 
 export type CalendarEvent = {
@@ -74,7 +81,7 @@ export async function getUpcomingEvents(max = 10): Promise<CalendarEvent[]> {
     const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
       calId,
     )}/events?${params.toString()}`
-    const res = await fetch(url, { next: { revalidate: 3600 } })
+    const res = await fetch(url, { next: { revalidate: 3600, tags: [CALENDAR_TAG] } })
     if (!res.ok) return []
     const data = (await res.json()) as { items?: GoogleEventItem[] }
     return (data.items ?? []).map(mapItem)
