@@ -10,7 +10,7 @@ export default async function PrayerPage({ params }: { params: { locale: string 
   const t = await getTranslations('prayer')
   return (
     <main>
-      <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
+      <PageBanner title={t('title')} />
       <Section>
         <p className="mx-auto max-w-xl text-center leading-relaxed text-slate-600">{t('intro')}</p>
         <div className="mx-auto mt-5 flex max-w-xl items-center gap-3 rounded-xl border border-brand-goldLine bg-white p-4 text-sm text-slate-600 shadow-sm">

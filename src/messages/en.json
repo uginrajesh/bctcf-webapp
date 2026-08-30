@@ -28,7 +28,6 @@
   },
   "events": {
     "title": "Events",
-    "tamilLabel": "நிகழ்வுகள்",
     "upcomingLabel": "Upcoming",
     "nextMass": "Next Monthly Mass",
     "dateTimeLabel": "Date & Time",
@@ -68,7 +67,6 @@
   },
   "about": {
     "title": "About Us",
-    "tamilLabel": "எங்களைப் பற்றி",
     "story": "Our Story",
     "storyParagraphs": [
       "Our community began in 2025, when a few Tamil Catholic families across Greater Vancouver realized how much they missed praying and singing in their own language. We come from both Sri Lanka and India, settled now in places like Vancouver, Burnaby, Richmond, Coquitlam, Surrey, Delta, and Langley - different hometowns, one shared faith.",
@@ -91,7 +89,6 @@
   },
   "priests": {
     "title": "Our Priests",
-    "tamilLabel": "நமது குருக்கள்",
     "intro": "The priests who shepherd our community and celebrate Mass with us in Tamil.",
     "knowMore": "Know more",
     "close": "Close",
@@ -99,25 +96,21 @@
   },
   "prayer": {
     "title": "Prayer Requests",
-    "tamilLabel": "செப மன்றாட்டுகள்",
     "intro": "Share your intentions with our community. Our coordinators gather requests and our priests remember them at Holy Mass.",
     "confidential": "Confidential - requests are seen only by coordinators and clergy, never published on the website."
   },
   "socials": {
     "title": "Socials",
-    "tamilLabel": "சமூக வலைதளங்கள்",
     "intro": "Stay connected with our community.",
     "comingSoon": "Coming Soon"
   },
   "contact": {
     "title": "Contact Us",
-    "tamilLabel": "தொடர்பு கொள்ளுங்கள்",
     "getInTouch": "Get in Touch",
     "location": "We gather across the Greater Vancouver area. See Events for the next Mass location."
   },
   "members": {
     "title": "New Members",
-    "tamilLabel": "புதிய உறுப்பினர்கள்",
     "intro": "New to British Columbia or just discovering us? We'd love to welcome your family. Fill in the form and a coordinator will reach out.",
     "nextTitle": "What Happens Next",
     "next1": "A coordinator reviews your details.",

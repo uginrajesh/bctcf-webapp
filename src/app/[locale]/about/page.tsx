@@ -15,7 +15,7 @@ export default async function AboutPage({ params }: { params: { locale: string }
 
   return (
     <main>
-      <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
+      <PageBanner title={t('title')} />
 
       <Section className="bg-brand-cream">
         <blockquote className="mx-auto max-w-2xl text-center">

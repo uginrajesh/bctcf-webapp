@@ -9,7 +9,7 @@ export default async function NewMembersPage({ params }: { params: { locale: str
   const t = await getTranslations('members')
   return (
     <main>
-      <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
+      <PageBanner title={t('title')} />
       <Section>
         <p className="mx-auto mb-6 max-w-lg text-center leading-relaxed text-slate-600">{t('intro')}</p>
         <FormEmbed src={SITE.newMemberFormUrl} title={t('title')} />

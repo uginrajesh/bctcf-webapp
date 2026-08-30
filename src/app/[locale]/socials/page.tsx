@@ -8,7 +8,7 @@ export default async function SocialsPage({ params }: { params: { locale: string
   const t = await getTranslations('socials')
   return (
     <main>
-      <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
+      <PageBanner title={t('title')} />
       <Section>
         <p className="mb-6 text-center text-slate-600">{t('intro')}</p>
         <SocialCards />

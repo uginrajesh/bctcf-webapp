@@ -9,7 +9,7 @@ export default async function ContactPage({ params }: { params: { locale: string
   const t = await getTranslations('contact')
   return (
     <main>
-      <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
+      <PageBanner title={t('title')} />
       <Section>
         <div className="mx-auto max-w-md">
           <div className="rounded-2xl border border-brand-goldLine bg-white p-6 text-sm text-slate-600 shadow-sm">

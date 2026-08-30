@@ -9,7 +9,7 @@ export default async function OurPriestsPage({ params }: { params: { locale: str
   const t = await getTranslations('priests')
   return (
     <main>
-      <PageBanner title={t('title')} tamilLabel={t('tamilLabel')} />
+      <PageBanner title={t('title')} />
       <Section>
         <p className="mx-auto mb-8 max-w-xl text-center text-slate-600">{t('intro')}</p>
         <PriestsGrid priests={data.priests as Priest[]} />
