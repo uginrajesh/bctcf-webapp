@@ -1,0 +1,43 @@
+<svg width="680" height="680" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>BC Tamil Catholic Family</title>
+<desc>The community seal reduced for small sizes: the gold ring and cream field of the full logo, with the cross, Host and chalice enlarged so they stay readable in a browser tab.</desc>
+<!--
+  A favicon reduction of /logo.svg, not a copy of it. The full seal carries
+  curved Tamil and English text and a ring of twelve people; all of that turns
+  to mush below ~64px, which is where this icon actually gets seen. So the text
+  and the people are dropped, the emblem is scaled up to fill the field, and its
+  gold is the darker #a9781a from the logo's own palette, because the lighter
+  #d8a92e reads as a smudge against the cream at 16px. Colours and geometry are
+  otherwise taken straight from logo.svg, so the two stay recognisably one mark.
+
+  Keep double hyphens out of these comments: they are invalid inside an XML
+  comment and make the whole file fail to parse.
+-->
+<defs>
+<g id="ray"><polygon points="340,340 337,256 343,256" fill="#f2c84b"/></g>
+</defs>
+
+<!-- Full-bleed, unlike logo.svg: a 16px tile has no pixels to spare on margin. -->
+<circle cx="340" cy="340" r="340" fill="#d8a92e"/>
+<circle cx="340" cy="340" r="323" fill="none" stroke="#efce7a" stroke-width="4"/>
+<circle cx="340" cy="340" r="284" fill="#fdf9f0"/>
+<circle cx="340" cy="340" r="284" fill="none" stroke="#a9781a" stroke-width="5"/>
+<circle cx="340" cy="340" r="276" fill="none" stroke="#1f4ea8" stroke-width="3"/>
+
+<g opacity="0.35" transform="translate(340 340) scale(2.7) translate(-340 -340)">
+<use href="#ray"/><use href="#ray" transform="rotate(22.5 340 340)"/><use href="#ray" transform="rotate(45 340 340)"/><use href="#ray" transform="rotate(67.5 340 340)"/><use href="#ray" transform="rotate(90 340 340)"/><use href="#ray" transform="rotate(112.5 340 340)"/><use href="#ray" transform="rotate(135 340 340)"/><use href="#ray" transform="rotate(157.5 340 340)"/><use href="#ray" transform="rotate(180 340 340)"/><use href="#ray" transform="rotate(202.5 340 340)"/><use href="#ray" transform="rotate(225 340 340)"/><use href="#ray" transform="rotate(247.5 340 340)"/><use href="#ray" transform="rotate(270 340 340)"/><use href="#ray" transform="rotate(292.5 340 340)"/><use href="#ray" transform="rotate(315 340 340)"/><use href="#ray" transform="rotate(337.5 340 340)"/>
+</g>
+
+<!-- Scaled about the emblem's own centre (340,362.5) so it lands dead centre. -->
+<g transform="translate(340 340) scale(3.0) translate(-340 -362.5)">
+<rect x="333" y="286" width="14" height="86" rx="3" fill="#a9781a" stroke="#6d4a0e" stroke-width="1.5"/>
+<rect x="312" y="310" width="56" height="14" rx="3" fill="#a9781a" stroke="#6d4a0e" stroke-width="1.5"/>
+<ellipse cx="340" cy="435" rx="15" ry="4" fill="#a9781a" stroke="#6d4a0e" stroke-width="1.5"/>
+<path d="M331,430 L349,430 L352,435 L328,435 Z" fill="#a9781a" stroke="#6d4a0e" stroke-width="1.5"/>
+<rect x="337" y="420" width="6" height="11" fill="#6d4a0e"/>
+<circle cx="340" cy="420" r="4" fill="#a9781a" stroke="#6d4a0e" stroke-width="1.5"/>
+<path d="M320,399 L360,399 L353,411 Q340,421 327,411 Z" fill="#a9781a" stroke="#6d4a0e" stroke-width="1.5"/>
+<circle cx="340" cy="388" r="13" fill="#ffffff" stroke="#6d4a0e" stroke-width="2.5"/>
+<path d="M340,380 L340,396 M333,388 L347,388" stroke="#6d4a0e" stroke-width="2.5" fill="none"/>
+</g>
+</svg>
